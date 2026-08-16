@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orphanage Initiative | Oakridge MUN XVI</title>
+  <link rel="icon" type="image/png" href="/assets/favicon-CwfnKxkE.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @keyframes navSlideDown { from { opacity: 0; transform: translateX(-50%) translateY(-18px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .3; transform: scale(.55); } }
+
+    :root {
+      --navy: #003057; --teal: #30CDD7; --teal-dark: #1E96A5;
+      --teal-light: #B4EBF5; --white: #FAF5ED; --gold: #BC9A6E;
+    }
+    html, body { font-family: 'Montserrat'; background: var(--navy); color: var(--white); overflow-x: clip; -webkit-overflow-scrolling: touch; min-height: 100%; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 200; animation: navSlideDown .45s cubic-bezier(0.4,0,0.2,1) both; }
+    .nav-pill { display: flex; align-items: center; background: rgba(1,3,8,.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-radius: 100px; border: 1px solid rgba(250,245,237,.07); padding: 10px 14px; justify-content: center; box-shadow: 0 8px 40px rgba(0,0,0,.4), inset 0 1px 0 rgba(250,245,237,.04); transition: padding .6s cubic-bezier(0.4,0,0.2,1), border-radius .6s cubic-bezier(0.4,0,0.2,1); white-space: nowrap; }
+    .nav-logo { font-size: .92rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--white); text-decoration: none; flex-shrink: 0; max-width: 220px; overflow: visible; transition: opacity .5s, max-width .6s cubic-bezier(0.4,0,0.2,1); }
+    .nav-logo span { color: var(--teal); }
+    .nav-center { display: flex; align-items: center; flex-shrink: 0; margin-left: 20px; transition: margin-left .6s; }
+    .nav-links-group { display: flex; gap: 22px; list-style: none; overflow: visible; opacity: 1; transition: opacity .4s, max-width .6s cubic-bezier(0.4,0,0.2,1), padding .6s; }
+    .nav-links-group.left  { padding: 0 18px 0 28px; max-width: 400px; }
+    .nav-links-group.right { padding: 0 8px 0 18px; max-width: 400px; }
+    .nav-links-group a { font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,245,237,.48); text-decoration: none; transition: color .2s; }
+    .nav-links-group a:hover, .nav-links-group a.active { color: var(--white); }
+    .nav-has-drop { position: relative; list-style: none; }
+    .nav-has-drop > a::after { content: ' ▾'; font-size: .5em; opacity: .55; }
+    .nav-drop { position: absolute; top: calc(100% + 18px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 320px; background: rgba(3,10,22,.97); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border: 1px solid rgba(48,205,215,.15); border-radius: 16px; padding: 16px; opacity: 0; pointer-events: none; transition: opacity .3s .55s cubic-bezier(0.4,0,0.2,1), transform .3s .55s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(48,205,215,.06); z-index: 300; }
+    .nav-drop::before { content: ''; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+    .nav-has-drop:hover .nav-drop { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); transition-delay: 0s; }
+    .nav-drop-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+    .nav-drop-item { font-size: .58rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(250,245,237,.55) !important; text-decoration: none; padding: 7px 8px; border-radius: 6px; transition: background .15s, color .15s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-drop-item:hover { background: rgba(48,205,215,.1); color: var(--teal) !important; }
+    .nav-drop--events { width: 220px; left: auto; right: 0; transform: translateY(-6px); }
+    .nav-has-drop:hover .nav-drop--events { transform: translateY(0); transition-delay: 0s; }
+    .nav-drop--events .nav-drop-grid { grid-template-columns: 1fr; }
+    .nav-drop--events .nav-drop-item { font-size: .62rem; padding: 9px 10px 9px 14px; border-left: 2px solid transparent; transition: background .2s, color .2s, border-color .2s, padding-left .2s; }
+    .nav-drop--events .nav-drop-item:hover { background: rgba(48,205,215,.1); color: var(--teal) !important; border-left-color: var(--teal); padding-left: 18px; }
+    .nav-mark { display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0 6px; }
+    .nav-mark img { width: 44px; height: 44px; object-fit: contain; opacity: .92; filter: drop-shadow(0 0 8px rgba(48,205,215,.35)); mix-blend-mode: lighten; transition: filter .2s, opacity .2s; }
+    .nav-mark:hover img { opacity: 1; filter: drop-shadow(0 0 14px rgba(48,205,215,.65)); }
+    .nav-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; max-width: 280px; overflow: visible; margin-left: 10px; transition: opacity .5s, max-width .6s; }
+    .nav-cta { background: linear-gradient(180deg,#30CDD7 0%,#1E96A5 100%); color: var(--navy); font-family: 'Montserrat'; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; border: none; border-radius: 12px; padding: 10px 18px; cursor: pointer; white-space: nowrap; overflow: visible; max-width: 200px; transition: transform .18s, box-shadow .18s, max-width .6s, padding .6s; }
+    .nav-cta:hover { box-shadow: 0 12px 30px rgba(2,20,26,0.08); }
+    .menu-btn { display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 6px; opacity: 0; pointer-events: none; flex-shrink: 0; transition: opacity .55s; }
+    .menu-btn span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: transform .3s, opacity .3s; transform-origin: center; }
+    .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    nav.scrolled .nav-logo        { opacity: 0; max-width: 0; }
+    nav.scrolled .nav-links-group { opacity: 0; max-width: 0 !important; padding: 0 !important; pointer-events: none; }
+    nav.scrolled .nav-right       { opacity: 0; max-width: 0; margin-left: 0; }
+    nav.scrolled .nav-cta         { max-width: 0; padding: 0; pointer-events: none; }
+    nav.scrolled .menu-btn        { opacity: 0; pointer-events: none; }
+    nav.scrolled .nav-center      { margin-left: 0; }
+    nav.scrolled .nav-pill        { padding: 8px; border-radius: 14px; }
+    @media (min-width: 769px) {
+      nav.hover-expanded .nav-logo { opacity: 1 !important; max-width: 220px !important; }
+      nav.hover-expanded .nav-links-group { opacity: 1 !important; max-width: 400px !important; pointer-events: auto !important; }
+      nav.hover-expanded .nav-links-group.left { padding: 0 18px 0 28px !important; }
+      nav.hover-expanded .nav-links-group.right { padding: 0 8px 0 18px !important; }
+      nav.hover-expanded .nav-right { opacity: 1 !important; max-width: 420px !important; margin-left: 10px !important; }
+      nav.hover-expanded .nav-center { margin-left: 20px !important; }
+      nav.hover-expanded .nav-pill { padding: 10px 14px !important; border-radius: 100px !important; }
+      nav.hover-expanded .nav-cta { max-width: 200px !important; padding: 10px 18px !important; pointer-events: auto !important; }
+      nav.hover-expanded .menu-btn { opacity: 0 !important; pointer-events: none !important; }
+    }
+    .mobile-nav { position: fixed; top: calc(var(--nav-bottom, 78px) + 10px); left: 50%; transform: translateX(-50%) translateY(-12px) scale(.97); width: calc(100% - 32px); max-width: 360px; max-height: calc(100dvh - var(--nav-bottom, 78px) - 16px); overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(48,205,215,.28) transparent; z-index: 199; background: rgba(1,3,8,.99); backdrop-filter: blur(28px); padding: 16px 24px; border-radius: 20px; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity .35s, transform .35s cubic-bezier(.175,.885,.32,1.2); border: 1px solid rgba(48,205,215,.2); box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+    .mobile-nav.open { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .mobile-nav a { font-size: .88rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,245,237,.75); text-decoration: none; padding: 18px 0; border-bottom: 1px solid rgba(250,245,237,.07); transition: color .2s; }
+    .mobile-nav a:last-child { border-bottom: none; }
+    
+    
+    .mobile-nav a:hover { color: var(--teal); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 64px 80px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -20%; right: -8%;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(48,205,215,.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 10%; left: -5%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,150,165,.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 60px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(250,245,237,.38); text-decoration: none;
+      margin-bottom: 32px;
+      transition: color .2s;
+    }
+    .hero-back:hover { color: var(--teal); }
+    .hero-kicker {
+      font-size: .6rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 900; letter-spacing: -.03em; line-height: .95;
+      color: var(--white); margin-bottom: 28px;
+    }
+    .hero-desc {
+      font-size: clamp(.88rem, 1.4vw, 1.05rem);
+      font-weight: 400; line-height: 1.7;
+      color: rgba(250,245,237,.55);
+      max-width: 520px; margin-bottom: 36px;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px; border-radius: 100px;
+      background: rgba(48,205,215,.06); border: 1px solid rgba(48,205,215,.2);
+      font-size: .56rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--teal);
+    }
+    .hero-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--teal);
+    }
+    .hero-deco {
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      font-weight: 900; letter-spacing: -.04em; line-height: 1.1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(48,205,215,.1);
+      user-select: none; pointer-events: none;
+      text-align: right;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section {
+      background: #1a0812;
+      padding: 100px 64px;
+      position: relative;
+    }
+    .gallery-section::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(220,100,140,.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .gallery-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .gallery-eyebrow {
+      font-size: .58rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--teal); opacity: .65; margin-bottom: 14px;
+    }
+    .gallery-title {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 900; letter-spacing: -.03em; line-height: 1;
+      color: var(--white); margin-bottom: 14px;
+    }
+    .gallery-desc {
+      font-size: .9rem; font-weight: 400; line-height: 1.7;
+      color: rgba(250,245,237,.4); max-width: 540px; margin-bottom: 48px;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .photo-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+    .photo-slot {
+      aspect-ratio: 4/3;
+      border-radius: 14px;
+      background: rgba(48,205,215,.04);
+      border: 1px solid rgba(48,205,215,.1);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, background .25s;
+    }
+    .photo-slot:hover { border-color: rgba(48,205,215,.2); background: rgba(48,205,215,.07); }
+    .photo-slot img {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; border-radius: 14px;
+      display: block;
+    }
+    .photo-slot-icon { color: rgba(48,205,215,.25); }
+    .photo-slot-label {
+      font-size: .55rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(250,245,237,.2); text-align: center; padding: 0 16px;
+    }
+    .photo-slot.wide { grid-column: span 2; aspect-ratio: 16/7; }
+
+    .awards-section {
+      background: var(--navy);
+      padding: 100px 64px;
+    }
+    .awards-inner { max-width: 1100px; margin: 0 auto; }
+
+    /* ── FOOTER ── */
+    footer { background: #001223; padding: 72px 56px 0; position: relative; overflow: hidden; }
+    footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(48,205,215,.3), transparent); }
+    .footer-top { display: grid; grid-template-columns: 300px 1px 1fr 1fr 1fr; gap: 0 48px; padding-bottom: 64px; }
+    .footer-divider { background: rgba(250,245,237,.08); width: 1px; align-self: stretch; }
+    .footer-brand { display: flex; flex-direction: column; gap: 20px; padding-right: 16px; }
+    .footer-logo { width: 64px; height: 64px; object-fit: contain; filter: brightness(0) invert(1); opacity: .85; }
+    .footer-chapter { font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--white); }
+    .footer-desc { font-size: .82rem; line-height: 1.75; color: rgba(250,245,237,.4); }
+    .footer-col h4 { font-size: .65rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a { font-size: .85rem; font-weight: 500; color: rgba(250,245,237,.55); text-decoration: none; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--teal); }
+    .footer-contact-item { margin-bottom: 18px; }
+    .footer-contact-item p { font-size: .78rem; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: .04em; }
+    .footer-contact-item a { font-size: .82rem; color: var(--teal); text-decoration: none; transition: opacity .2s; }
+    .footer-contact-item span { font-size: .82rem; color: rgba(250,245,237,.4); line-height: 1.6; display: block; }
+    .footer-detail-item { margin-bottom: 18px; }
+    .footer-detail-item p { font-size: .78rem; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: .04em; }
+    .footer-detail-item span { font-size: .82rem; color: rgba(250,245,237,.4); font-style: italic; }
+    .footer-social { display: flex; gap: 12px; margin-top: 6px; }
+    .footer-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(250,245,237,.12); display: flex; align-items: center; justify-content: center; color: rgba(250,245,237,.4); text-decoration: none; transition: border-color .2s, color .2s, background .2s; }
+    .footer-social a:hover { border-color: var(--teal); color: var(--teal); background: rgba(48,205,215,.08); }
+    .footer-social svg { width: 15px; height: 15px; fill: currentColor; }
+    .footer-bottom { border-top: 1px solid rgba(250,245,237,.06); padding: 24px 0; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+    .footer-bottom p { font-size: .7rem; font-weight: 500; color: rgba(250,245,237,.25); letter-spacing: .04em; }
+    .footer-bottom a { color: var(--teal); text-decoration: none; }
+
+    /* ── SCROLL REVEAL ── */
+    .sr { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(0.4,0,0.2,1), transform .7s cubic-bezier(0.4,0,0.2,1); }
+    .sr.sr-visible { opacity: 1; transform: translateY(0); }
+    .sr-d1 { transition-delay: .1s; }
+    .sr-d2 { transition-delay: .2s; }
+    .sr-d3 { transition-delay: .3s; }
+
+    /* ── FOCUS VISIBLE ── */
+    :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { top: 10px; }
+      .nav-pill { padding: 8px 14px 8px 14px; }
+      .nav-center { display: none; }
+      .nav-right .nav-cta { display: none; } .nav-right > a { display: none !important; }
+      .nav-right { margin-left: 10px; max-width: 52px; }
+      .menu-btn { opacity: 1; pointer-events: auto; }
+      nav.scrolled .nav-logo { opacity: 1 !important; max-width: 220px !important; }
+      nav.scrolled .nav-right { opacity: 1 !important; max-width: 52px !important; margin-left: 10px !important; }
+      nav.scrolled .nav-pill { padding: 8px 8px 8px 18px !important; border-radius: 100px !important; }
+      .hero { padding: 100px 24px 60px; min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; gap: 0; }
+      .hero-deco { display: none; }
+      .gallery-section, .awards-section { padding: 72px 24px; }
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .photo-slot.wide { grid-column: span 2; }
+      footer { padding: 48px 20px 0; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px 0; }
+      .footer-divider { display: none; }
+      .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+    }
+    /* ── MOBILE PERF: solid nav, no backdrop blur ── */
+    @media (max-width: 768px) {
+      .nav-pill { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(1,3,8,.99) !important; }
+      .nav-drop { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(3,12,26,.98) !important; }
+      .mobile-nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+      .pg-orb, .page-hero-orb { filter: none !important; }
+    }
+  
+    /* Register dropdown */
+    .nav-reg-wrap { position: relative; display: inline-block; }
+    .nav-cta-chevron { display: inline-block; margin-left: 4px; font-size: .65em; vertical-align: middle; transition: transform .3s .55s cubic-bezier(0.4,0,0.2,1); }
+    .nav-reg-wrap:hover .nav-cta-chevron { transform: rotate(180deg); transition-delay: 0s; transition-duration: .3s; }
+    .nav-drop--reg { width: 210px; left: auto; right: 0; transform: translateY(-6px); }
+    .nav-reg-wrap:hover .nav-drop--reg { opacity: 1; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
+    .nav-drop--reg .nav-drop-reg-item { display: block; text-decoration: none; font-family: Montserrat, sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: rgba(250,245,237,.6); padding: 9px 10px 9px 14px; border-left: 2px solid transparent; border-radius: 6px; transition: background .2s, color .2s, border-color .2s, padding-left .2s; }
+    .nav-drop--reg .nav-drop-reg-item:hover { background: rgba(48,205,215,.1); color: var(--teal); border-left-color: var(--teal); padding-left: 18px; }
+    .nav-drop--reg .nav-drop-reg-sub { display: block; font-size: .52rem; font-weight: 500; text-transform: none; letter-spacing: 0; opacity: .5; margin-top: 2px; }
+  
+    .mobile-reg-accordion { display: flex; flex-direction: column; width: 100%; margin-top: 8px; }
+    .mobile-reg-accordion .mobile-nav-cta { width: 100%; background: linear-gradient(135deg, #30CDD7 0%, #1E96A5 100%); color: #003057 !important; border: none; border-radius: 12px; padding: 14px 0; font-family: 'Montserrat'; font-size: .88rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: filter .2s; }
+    .mobile-reg-accordion .mobile-nav-cta:active { filter: brightness(.9); }
+    .mobile-reg-options { display: none; flex-direction: column; gap: 8px; margin-top: 12px; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 12px; }
+    .mobile-reg-accordion.open .mobile-reg-options { display: flex; }
+    .mobile-reg-options a { padding: 10px !important; font-size: .75rem !important; text-align: center; border: 1px solid rgba(48,205,215,.2) !important; border-radius: 8px; background: rgba(48,205,215,.05); margin: 0 !important; }
+    .mobile-reg-options a:hover { background: rgba(48,205,215,.15); }
+    
+  </style>
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://oakmun.netlify.app/orphanage-initiative.html" />
+  <meta property="og:title"       content="Community Outreach — Oakridge MUN XVI" />
+  <meta property="og:description" content="Oakridge MUN's community outreach and orphanage initiative — diplomacy beyond the dais." />
+  <meta property="og:image"       content="https://oakmun.netlify.app/conference_photos/1.webp" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Community Outreach — Oakridge MUN XVI" />
+  <meta name="twitter:description" content="Oakridge MUN's community outreach and orphanage initiative — diplomacy beyond the dais." />
+  <meta name="twitter:image"       content="https://oakmun.netlify.app/conference_photos/1.webp" />  <style>
+    @keyframes sponsor-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-100% / 3)); }
+    }
+    .sponsors-hero {
+      background: linear-gradient(180deg, #03080f 0%, #05101f 100%);
+      padding: 38px 0 46px;
+      overflow: hidden;
+      position: relative;
+    }
+    .sponsors-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 90px;
+      background: linear-gradient(to bottom, rgba(39,176,189,.18), transparent);
+      pointer-events: none;
+      opacity: .5;
+    }
+    .sponsors-heading {
+      text-align: center;
+      font-family: 'Montserrat';
+      font-size: clamp(.82rem, 1.6vw, 1.1rem);
+      font-weight: 900;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 26px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 16px rgba(0,0,0,.6);
+    }
+    .sponsors-featured {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 34px;
+      position: relative;
+      z-index: 1;
+    }
+    .sponsors-featured-card img {
+      height: 120px;
+      width: auto;
+      max-width: 360px;
+      object-fit: contain;
+      display: block;
+      opacity: 1;
+      transition: opacity .2s ease, transform .2s ease;
+      border-radius: 12px;
+      padding: 16px;
+      background: rgba(30, 150, 165, 0.2);
+    }
+    .sponsors-featured-card:hover img {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    .sponsors-marquee {
+      overflow: hidden;
+      width: 100%;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+    }
+    .sponsors-track {
+      display: flex;
+      align-items: center;
+      gap: 70px;
+      width: max-content;
+      padding: 0 28px;
+      animation: sponsor-scroll 65s linear infinite;
+      will-change: transform;
+    }
+    @media (prefers-reduced-motion: reduce) { .sponsors-track { animation: none; } }
+    .sponsor-logo img {
+      height: 100px;
+      width: auto;
+      max-width: 200px;
+      object-fit: contain;
+      display: block;
+      opacity: 1;
+      transition: opacity .2s ease, transform .2s ease;
+      border-radius: 10px;
+      padding: 12px;
+      background: rgba(48, 205, 215, 0.15);
+    }
+    .sponsor-logo:hover img {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .sponsors-featured-card img { height: 46px; max-width: 260px; }
+      .sponsor-logo img { height: 50px; max-width: 140px; }
+      .sponsors-track { gap: 50px; }
+      .sponsors-hero { padding: 30px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="/">Home</a>
+    <a href="/committees.html">Committees</a>
+    <a href="/secretariat.html">Secretariat</a>
+    <a href="/#schedule">Schedule</a>
+    <a href="/resources.html">Resources</a>
+    <a href="/allocations.html">Allocations</a>
+    <a href="/social-night.html">Social Night</a>
+    <a href="/networking-hour.html">Networking Hour</a>
+    <a href="/orphanage-initiative.html">Community Outreach</a>
+    
+    <a href="/qr-lookup.html" class="mobile-nav-cta" style="text-decoration:none;">Get Your QR Code</a>
+
+  </div>
+
+  <nav id="navbar">
+    <div class="nav-pill">
+      <a class="nav-logo" href="/">Oakridge <span>MUN</span></a>
+      <div class="nav-center">
+        <ul class="nav-links-group left">
+          <li><a href="/committees.html">Committees</a></li>
+          <li><a href="/secretariat.html">Secretariat</a></li>
+          <li><a href="/allocations.html">Allocations</a></li>
+        </ul>
+        <div class="nav-mark"><img src="/assets/logo-OoOpTRjq.png" alt="Oakridge MUN" /></div>
+        <ul class="nav-links-group right">
+          <li><a href="/#schedule">Schedule</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li class="nav-has-drop"><a href="#">Events</a>
+            <div class="nav-drop nav-drop--events">
+              <div class="nav-drop-grid">
+                <a class="nav-drop-item" href="/social-night.html">Social Night</a>
+                <a class="nav-drop-item" href="/networking-hour.html">Networking Hour</a>
+                <a class="nav-drop-item" href="/orphanage-initiative.html">Community Outreach</a>
+                <a class="nav-drop-item" href="/delegation-guidelines.html">Delegation Guidelines</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        <button class="nav-cta" onclick="window.location.href='/qr-lookup.html'">Get Your QR Code</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <a href="/" class="hero-back sr">← Back to Home</a>
+        <div class="hero-kicker sr">Oakridge MUN XVI &nbsp;·&nbsp; Community Initiative</div>
+        <h1 class="hero-title sr">Orphanage<br>Initiative.</h1>
+        <p class="hero-desc sr">Every year, Oakridge MUN opens its doors to children from a local orphanage, giving them a seat at the table. This year, they join us as delegates of the United Nations General Assembly — debating, deliberating, and making their voices heard.</p>
+        <div class="hero-badges sr">
+          <div class="hero-badge">Chapter XVI</div>
+          <div class="hero-badge">UNGA</div>
+          <div class="hero-badge">Community Outreach</div>
+        </div>
+      </div>
+      <div class="hero-deco sr">XVI<br>Cares.</div>
+    </div>
+  </section>
+
+  <!-- GALLERY: COMMITTEE PHOTOS -->
+  <section class="gallery-section">
+    <div class="gallery-inner">
+      <div class="gallery-eyebrow sr">From Last Year's OakMUN</div>
+      <h2 class="gallery-title sr sr-d1">In the Committee Room.</h2>
+      <p class="gallery-desc">Snapshots of the orphanage children at last year's Oakridge MUN — debating, deliberating, and making their voices heard for the first time.</p>
+      <div class="photo-grid">
+        <div class="photo-slot">
+          <img src="/assets/orph_1-DuhQoy4i.webp" alt="Orphanage children in committee session" loading="lazy" decoding="async" />
+        </div>
+        <div class="photo-slot">
+          <img src="/assets/orph_2-TBGpSzle.webp" alt="Orphanage delegates at the table" loading="lazy" decoding="async" />
+        </div>
+        <div class="photo-slot">
+          <img src="/orphanage_photos/1 (1).jpeg" alt="Orphanage initiative photo" loading="lazy" decoding="async" />
+        </div>
+        <div class="photo-slot">
+          <img src="/orphanage_photos/1 (2).jpeg" alt="Orphanage initiative photo" loading="lazy" decoding="async" />
+        </div>
+        <div class="photo-slot">
+          <img src="/orphanage_photos/1 (3).jpeg" alt="Orphanage initiative photo" loading="lazy" decoding="async" />
+        </div>
+        <div class="photo-slot">
+          <img src="/orphanage_photos/1 (4).jpeg" alt="Orphanage initiative photo" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ OUR SPONSORS ═══ -->
+  <section class="sponsors-hero">
+    <h2 class="sponsors-heading">Our Sponsors</h2>
+    <div class="sponsors-featured">
+      <div class="sponsors-featured-card">
+        <img src="/assets/Athena%20logo-BNXqKtm5.svg" alt="Athena — Principal Sponsor" />
+      </div>
+    </div>
+    <div class="sponsors-marquee">
+      <div class="sponsors-track">
+        <div class="sponsor-logo"><img src="/assets/DSRlogo-CupUHXe9.svg" alt="DSR" /></div>
+        <div class="sponsor-logo"><img src="/assets/Game%20Hub%20logo-BAC7UGoN.svg" alt="Game Hub" /></div>
+        <div class="sponsor-logo"><img src="/assets/League%20logo-CpHyQNS_.svg" alt="League" /></div>
+        <div class="sponsor-logo"><img src="/assets/Royalton%20hotels%20logo-CIOja6d1.svg" alt="Royalton Hotels" /></div>
+        <div class="sponsor-logo"><img src="/assets/RSRM%20steel%20logo-BGHOJS_l.svg" alt="RSRM Steel" /></div>
+        <div class="sponsor-logo"><img src="/assets/Snow%20Kingdom%20logo-Nm3VYkCW.svg" alt="Snow Kingdom" /></div>
+        <div class="sponsor-logo"><img src="/assets/DSRlogo-CupUHXe9.svg" alt="DSR" /></div>
+        <div class="sponsor-logo"><img src="/assets/Game%20Hub%20logo-BAC7UGoN.svg" alt="Game Hub" /></div>
+        <div class="sponsor-logo"><img src="/assets/League%20logo-CpHyQNS_.svg" alt="League" /></div>
+        <div class="sponsor-logo"><img src="/assets/Royalton%20hotels%20logo-CIOja6d1.svg" alt="Royalton Hotels" /></div>
+        <div class="sponsor-logo"><img src="/assets/RSRM%20steel%20logo-BGHOJS_l.svg" alt="RSRM Steel" /></div>
+        <div class="sponsor-logo"><img src="/assets/Snow%20Kingdom%20logo-Nm3VYkCW.svg" alt="Snow Kingdom" /></div>
+        <div class="sponsor-logo"><img src="/assets/DSRlogo-CupUHXe9.svg" alt="DSR" /></div>
+        <div class="sponsor-logo"><img src="/assets/Game%20Hub%20logo-BAC7UGoN.svg" alt="Game Hub" /></div>
+        <div class="sponsor-logo"><img src="/assets/League%20logo-CpHyQNS_.svg" alt="League" /></div>
+        <div class="sponsor-logo"><img src="/assets/Royalton%20hotels%20logo-CIOja6d1.svg" alt="Royalton Hotels" /></div>
+        <div class="sponsor-logo"><img src="/assets/RSRM%20steel%20logo-BGHOJS_l.svg" alt="RSRM Steel" /></div>
+        <div class="sponsor-logo"><img src="/assets/Snow%20Kingdom%20logo-Nm3VYkCW.svg" alt="Snow Kingdom" /></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img src="/assets/logo-OoOpTRjq.png" alt="Oakridge MUN Logo" class="footer-logo" />
+          <span style="font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 800; letter-spacing: 0.12em; color: var(--white, #faf5ed); line-height: 1.2; text-transform: uppercase;">Oakridge<br><span style="color: var(--teal, #30CDD7);">MUN</span></span>
+        </div>
+        <p class="footer-chapter">Chapter XVI</p>
+        <p class="footer-desc">Oakridge Model United Nations brings together passionate delegates from across the high schools of India for three days of diplomatic excellence.</p>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/#schedule">Schedule</a>
+    <a href="/allocations.html">Allocations</a></li>
+          <li><a href="https://forms.office.com/r/kdyTBHKxE7" target="_blank" rel="noopener">International Press</a></li>
+          <li><a href="#">Allocations</a></li>
+          <li><a href="/#faq">FAQs</a></li>
+          <li><a href="/committees.html">Explore Committees</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item">
+          <p>General Enquiries</p>
+          <a href="/cdn-cgi/l/email-protection#0e637b604e616f657c676a696b206760"><span class="__cf_email__" data-cfemail="610c140f210e000a13080506044f080f">[email&#160;protected]</span></a>
+        </div>
+        <div class="footer-contact-item">
+          <p>Location</p>
+          <span>Oakridge International School<br>Hyderabad, India</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Event Details</h4>
+        <div class="footer-detail-item">
+          <p>Dates</p>
+          <span style="font-style:normal;">24th July – 26th July, 2026</span>
+        </div>
+        <div class="footer-detail-item">
+          <p>Theme</p>
+          <span>"Create. Debate. Innovate."</span>
+        </div>
+        <div class="footer-detail-item">
+          <p>Connect With Us</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/oakmun/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p>2026 Oakridge International School. All rights reserved.</p>
+      <p>Website designed and developed by <a href="https://www.instagram.com/srijai_kodali/" target="_blank" rel="noopener">Srijai Kodali</a></p>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const navbar = document.getElementById('navbar');
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    function syncNavBottom() {
+      const nav = document.getElementById('navbar');
+      if (nav) document.documentElement.style.setProperty('--nav-bottom', nav.getBoundingClientRect().bottom + 'px');
+    }
+    syncNavBottom();
+    window.addEventListener('resize', syncNavBottom);
+    window.addEventListener('orientationchange', syncNavBottom);
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      syncNavBottom();
+      const isOpen = mobileNav.classList.toggle('open');
+      menuBtn.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.addEventListener('click', (e) => {
+      if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        menuBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      menuBtn.classList.remove('open');
+      document.body.style.overflow = '';
+    }));
+
+    let navScrolled = false;
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth <= 768) return;
+      const y = window.scrollY;
+      const goingDown = y > lastScrollY;
+      lastScrollY = y;
+      if (goingDown && y > 80 && !navScrolled) { navScrolled = true; navbar.classList.add('scrolled'); }
+      else if (!goingDown && navScrolled) { navScrolled = false; navbar.classList.remove('scrolled'); }
+    }, { passive: true });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768 && navScrolled) { navScrolled = false; navbar.classList.remove('scrolled'); }
+    });
+    const navMark = navbar.querySelector('.nav-mark');
+    if (navMark) {
+      navMark.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 768 && navbar.classList.contains('scrolled')) navbar.classList.add('hover-expanded');
+      });
+    }
+    navbar.addEventListener('mouseleave', () => navbar.classList.remove('hover-expanded'));
+
+    // ── SCROLL REVEAL ──
+    (function() {
+      const srEls = document.querySelectorAll('.sr');
+      if (!srEls.length) return;
+      const srObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('sr-visible'); srObs.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      srEls.forEach(el => srObs.observe(el));
+    })();
+  </script>
+  <script src="/vendor/lenis.min.js"></script>
+  <script>
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    if (!isTouchDevice) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const lenis = new Lenis(prefersReducedMotion ? { smoothWheel: false } : {
+        lerp: 0.11, smoothWheel: true, wheelMultiplier: 0.95, normalizeWheel: true, infinite: false,
+      });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+  </script>
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5c0c1894a48148ec84530182e4f9cb78"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

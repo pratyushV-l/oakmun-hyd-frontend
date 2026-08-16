@@ -1,0 +1,2150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Committee | Oakridge MUN XVI</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@media (min-width: 769px) { html { zoom: 1.1; } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes navSlideDown {
+      from { opacity: 0; transform: translateX(-50%) translateY(-18px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    :root {
+      --navy: #003057;
+      --teal: #30CDD7;
+      --teal-dark: #1E96A5;
+      --teal-light: #B4EBF5;
+      --red: #FF3750;
+      --white: #FAF5ED;
+      --gold: #BC9A6E;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'Montserrat';
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: clip;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 14px; left: 50%;
+      transform: translateX(-50%); z-index: 200;
+      animation: navSlideDown .45s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .nav-pill {
+      display: flex; align-items: center; gap: 0;
+      background: rgba(1,3,8,.97);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-radius: 100px; border: 1px solid rgba(250,245,237,.07);
+      padding: 10px 14px; justify-content: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,.4), inset 0 1px 0 rgba(250,245,237,.04);
+      transition: padding .6s cubic-bezier(0.4,0,0.2,1), border-radius .6s cubic-bezier(0.4,0,0.2,1);
+      white-space: nowrap;
+    }
+    .nav-logo {
+      font-size: .92rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      flex-shrink: 0; overflow: visible; max-width: 220px; opacity: 1;
+      transition: opacity .5s cubic-bezier(0.4,0,0.2,1), max-width .6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-center { display: flex; align-items: center; flex-shrink: 0; margin-left: 20px; transition: margin-left .6s cubic-bezier(0.4,0,0.2,1); }
+    .nav-links-group {
+      display: flex; gap: 22px; list-style: none; overflow: visible; opacity: 1;
+      transition: opacity .4s cubic-bezier(0.4,0,0.2,1), max-width .6s cubic-bezier(0.4,0,0.2,1), padding .6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-links-group.left  { padding: 0 18px 0 28px; max-width: 400px; }
+    .nav-links-group.right { padding: 0 8px 0 18px; max-width: 400px; }
+    .nav-links-group a {
+      font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(250,245,237,.48); text-decoration: none; transition: color .2s;
+    }
+    .nav-links-group a:hover, .nav-links-group a.active { color: var(--white); }
+    .nav-mark {
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; padding: 0 6px;
+    }
+    .nav-mark img { width: 44px; height: 44px; object-fit: contain; opacity: .92; filter: drop-shadow(0 0 8px rgba(48,205,215,.35)); mix-blend-mode: lighten; transition: filter .2s, opacity .2s; }
+    .nav-mark:hover img { opacity: 1; filter: drop-shadow(0 0 14px rgba(48,205,215,.65)); }
+    .nav-right {
+      display: flex; align-items: center; gap: 6px;
+      flex-shrink: 0; overflow: visible; max-width: 420px; opacity: 1; margin-left: 10px;
+      transition: opacity .5s cubic-bezier(0.4,0,0.2,1), max-width .6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-cta {
+      background: linear-gradient(180deg,#30CDD7 0%,#1E96A5 100%);
+      color: var(--navy); font-family: 'Montserrat';
+      font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 18px;
+      cursor: pointer; white-space: nowrap; overflow: visible; max-width: 200px; opacity: 1;
+      transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s,
+                  opacity .45s cubic-bezier(0.4,0,0.2,1), max-width .6s cubic-bezier(0.4,0,0.2,1), padding .6s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 6px 18px rgba(2,20,26,0.06);
+    }
+    .nav-cta:hover { box-shadow: 0 12px 30px rgba(2,20,26,0.08); }
+    .nav-cta:active { transform: translateY(0) scale(.997); box-shadow: 0 6px 16px rgba(2,20,26,0.06); }
+    nav.scrolled .nav-logo        { opacity: 0; max-width: 0; }
+    nav.scrolled .nav-links-group { opacity: 0; max-width: 0; padding: 0; pointer-events: none; }
+    nav.scrolled .nav-right       { opacity: 0; max-width: 0; margin-left: 0; }
+    nav.scrolled .nav-cta         { opacity: 0; max-width: 0; padding: 0; pointer-events: none; }
+    nav.scrolled .menu-btn        { opacity: 0; pointer-events: none; }
+    nav.scrolled .nav-center      { margin-left: 0; }
+    nav.scrolled .nav-pill        { padding: 8px; border-radius: 14px; }
+
+    @media (min-width: 769px) {
+      nav.hover-expanded .nav-logo { opacity: 1 !important; max-width: 220px !important; }
+      nav.hover-expanded .nav-links-group { opacity: 1 !important; max-width: 400px !important; pointer-events: auto !important; }
+      nav.hover-expanded .nav-links-group.left { padding: 0 18px 0 28px !important; }
+      nav.hover-expanded .nav-links-group.right { padding: 0 8px 0 18px !important; }
+      nav.hover-expanded .nav-right { opacity: 1 !important; max-width: 420px !important; margin-left: 10px !important; }
+      nav.hover-expanded .nav-center { margin-left: 20px !important; }
+      nav.hover-expanded .nav-pill { padding: 10px 14px !important; border-radius: 100px !important; }
+      nav.hover-expanded .nav-cta { opacity: 1 !important; max-width: 200px !important; padding: 10px 18px !important; pointer-events: auto !important; }
+      nav.hover-expanded .menu-btn { opacity: 0 !important; pointer-events: none !important; }
+    }
+    
+    
+    
+    
+
+    .mobile-nav {
+      position: fixed;
+      top: calc(var(--nav-bottom, 78px) + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-12px) scale(0.97);
+      width: calc(100% - 32px);
+      max-width: 360px;
+      max-height: calc(100dvh - var(--nav-bottom, 78px) - 16px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(48,205,215,.28) transparent;
+      z-index: 199;
+      background: rgba(1,3,8,.99);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      padding: 16px 24px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s cubic-bezier(0.4,0,0.2,1), transform .35s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+      border: 1px solid rgba(48,205,215,.2);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .mobile-nav.open {
+      transform: translateX(-50%) translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .mobile-nav a {
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(250,245,237,.75);
+      text-decoration: none;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(250,245,237,.07);
+      transition: color .2s;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    
+    
+    .mobile-nav a:hover { color: var(--teal); }
+    .menu-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .55s cubic-bezier(0.4,0,0.2,1), background .2s;
+    }
+    .menu-btn:hover { background: rgba(250,245,237,.08); }
+    .menu-btn span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform .2s cubic-bezier(0.2,0.8,0.2,1);
+      transform-origin: center;
+    }
+    .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      overflow: hidden;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      border-radius: 24px;
+      margin: 12px;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      z-index: 0;
+    }
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(0,5,18,.95) 0%, rgba(0,12,36,.6) 45%, rgba(0,5,18,.22) 100%),
+        linear-gradient(100deg, rgba(0,20,50,.65) 0%, transparent 55%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 108px 64px 72px;
+    }
+    .hero-bottom { max-width: 900px; }
+    .hero-rule {
+      width: 48px; height: 2px;
+      background: linear-gradient(to right, var(--teal), transparent);
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+    .hero-panel { display: none; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: absolute;
+      top: 108px;
+      left: 64px;
+      z-index: 10;
+      color: var(--navy);
+      text-decoration: none;
+      font-size: .65rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: 'Montserrat';
+      background: linear-gradient(180deg,#30CDD7 0%,#1E96A5 100%);
+      border: none;
+      border-radius: 100px;
+      padding: 9px 16px 9px 12px;
+      transition: background .2s, color .2s, transform .2s;
+      filter: saturate(.6) brightness(.88);
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.18), inset 0 -2px 0 rgba(0,0,0,.28), inset 0 0 0 1px rgba(0,0,0,.1);
+    }
+    .back-link::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M10 3L5 8l5 5' stroke='%23003057' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-shrink: 0;
+    }
+    .back-link:hover {
+      background: linear-gradient(180deg,#30CDD7 0%,#1E96A5 100%);
+      transform: translateX(-2px);
+    }
+    .committee-kicker {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+      font-family: 'Montserrat';
+    }
+    .committee-title {
+      font-size: clamp(4rem, 9vw, 8.5rem);
+      line-height: .88;
+      font-weight: 900;
+      letter-spacing: -.06em;
+      color: var(--white);
+      max-width: 840px;
+      font-family: 'Montserrat';
+    }
+    .committee-subtitle {
+      max-width: 560px;
+      margin-top: 18px;
+      font-size: .95rem;
+      line-height: 1.7;
+      font-weight: 500;
+      color: rgba(250,245,237,.65);
+      font-family: 'Montserrat';
+    }
+    .hero-panel {
+      position: relative;
+      min-height: 320px;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(250,245,237,.75), transparent 0 11%, transparent 12%),
+        linear-gradient(135deg, var(--tile-a), var(--tile-b));
+      box-shadow: 0 34px 80px rgba(0,48,87,.16);
+    }
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      inset: 28px;
+      border: 1px solid rgba(0,48,87,.2);
+      border-radius: 20px;
+      transform: rotate(-5deg);
+    }
+    /* ── PANEL PHOTO ── */
+    .panel-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 0;
+    }
+    .panel-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,12,36,.82) 0%,
+        rgba(0,20,48,.5)  40%,
+        rgba(0,12,36,.25) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+    .panel-code {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 42px;
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -.05em;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,.55);
+      z-index: 2;
+    }
+    .panel-code.med  { font-size: clamp(1.7rem, 3.5vw, 3.5rem); letter-spacing: -.04em; }
+    .panel-code.long { font-size: clamp(1.1rem, 2.2vw, 2.2rem); letter-spacing: -.03em; }
+    .panel-label {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(250,245,237,.75);
+      text-shadow: 0 1px 6px rgba(0,0,0,.4);
+    }
+    .panel-logo {
+      position: absolute;
+      right: 28px;
+      top: 28px;
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      opacity: .28;
+      z-index: 2;
+    }
+
+    /* ══════════════════════════════════════
+       BENTO GRID
+    ══════════════════════════════════════ */
+    .bento {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 48px 100px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    /* card base */
+    .card {
+      background: rgba(255,255,255,.028);
+      border: 1px solid rgba(250,245,237,.07);
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: border-color .25s, transform .25s, background .25s, opacity .35s;
+    }
+    .card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover {
+      border-color: rgba(48,205,215,.18);
+      background: rgba(48,205,215,.025);
+      transform: translateY(-3px);
+    }
+    .card-label {
+      font-size: .56rem; font-weight: 800;
+      letter-spacing: .24em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 14px;
+      display: block;
+    }
+
+    /* ── OVERVIEW card — full width ── */
+    .card-overview {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 40px 40px;
+    }
+    .overview-left-title {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -.04em;
+      line-height: 1;
+      color: var(--white);
+    }
+    .overview-right-text {
+      font-size: .95rem;
+      line-height: 1.85;
+      color: rgba(250,245,237,.5);
+    }
+    .card-overview-ghost {
+      position: absolute;
+      right: -0.04em; bottom: -0.15em;
+      font-size: clamp(6rem, 14vw, 11rem);
+      font-weight: 900; letter-spacing: -.06em;
+      color: rgba(48,205,215,.045);
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+
+    /* ── AGENDA card ── */
+    .card-agenda {
+      grid-column: 1 / -1;
+      min-height: 200px;
+      border-left: 3px solid rgba(255,55,80,.55);
+      background: rgba(255,55,80,.025);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .card-agenda:hover {
+      border-color: rgba(255,55,80,.25);
+      background: rgba(255,55,80,.04);
+    }
+    .card-agenda .card-label { color: var(--red); }
+    /* Prominent style when real agenda exists */
+    .card-agenda.has-agenda {
+      border-left: 4px solid var(--teal);
+      background: linear-gradient(135deg, rgba(48,205,215,.09) 0%, rgba(0,30,87,.04) 60%, transparent 100%);
+      box-shadow: 0 0 0 1px rgba(48,205,215,.18), 0 0 60px rgba(48,205,215,.08), inset 0 0 40px rgba(48,205,215,.03);
+      min-height: 280px;
+      grid-template-columns: 200px 1fr;
+      align-items: center;
+      padding-top: 44px;
+      padding-bottom: 44px;
+    }
+    .card-agenda.has-agenda:hover {
+      border-color: rgba(48,205,215,1);
+      background: linear-gradient(135deg, rgba(48,205,215,.13) 0%, rgba(0,30,87,.06) 60%, transparent 100%);
+      box-shadow: 0 0 0 1px rgba(48,205,215,.28), 0 0 80px rgba(48,205,215,.12), inset 0 0 50px rgba(48,205,215,.05);
+    }
+    .card-agenda.has-agenda .card-label { color: var(--teal); letter-spacing: .2em; }
+    .card-agenda.has-agenda .agenda-ghost { color: rgba(48,205,215,.05); }
+    .card-agenda.has-agenda .agenda-left-head {
+      color: var(--teal);
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      text-shadow: 0 0 40px rgba(48,205,215,.3);
+    }
+    .agenda-confirmed-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(48,205,215,.12);
+      border: 1px solid rgba(48,205,215,.3);
+      border-radius: 100px; padding: 5px 12px;
+      margin-bottom: 16px; align-self: flex-start;
+    }
+    .agenda-confirmed-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 6px var(--teal);
+    }
+    .agenda-confirmed-text {
+      font-size: .56rem; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--teal);
+    }
+    .agenda-left-head {
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -.05em;
+      line-height: 1;
+      color: var(--white);
+      margin-top: 10px;
+    }
+    .agenda-ghost {
+      position: absolute;
+      right: -0.04em; bottom: -0.12em;
+      font-size: clamp(5rem, 12vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -.06em;
+      color: rgba(255,55,80,.04);
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+    .agenda-right-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .agenda-right-title {
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(250,245,237,.85);
+    }
+    .agenda-right-note {
+      font-size: .92rem;
+      line-height: 1.7;
+      color: rgba(250,245,237,.78);
+    }
+    .tba-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,55,80,.1);
+      border: 1px solid rgba(255,55,80,.22);
+      border-radius: 100px; padding: 5px 12px;
+      align-self: flex-start;
+    }
+    .tba-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .tba-pill-text {
+      font-size: .56rem; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--red);
+    }
+
+    /* ── PREP cards ── */
+    .card-prep { grid-column: span 3; }
+
+    /* ── REGISTRATION OPEN card ── */
+    .card-reg-open {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(48,205,215,.13) 0%, rgba(0,48,87,.08) 100%);
+      border: 1px solid rgba(48,205,215,.35);
+      box-shadow: 0 0 0 1px rgba(48,205,215,.1), 0 0 60px rgba(48,205,215,.1);
+      border-radius: 20px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      text-decoration: none;
+      transition: background .3s, box-shadow .3s, border-color .3s;
+    }
+    .card-reg-open:hover {
+      background: linear-gradient(135deg, rgba(48,205,215,.18) 0%, rgba(0,48,87,.12) 100%);
+      border-color: rgba(48,205,215,.6);
+      box-shadow: 0 0 0 1px rgba(48,205,215,.2), 0 0 80px rgba(48,205,215,.15);
+    }
+    .card-reg-open-left { display: flex; flex-direction: column; gap: 10px; }
+    .card-reg-open-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(48,205,215,.15);
+      border: 1px solid rgba(48,205,215,.35);
+      border-radius: 100px; padding: 5px 14px;
+      align-self: flex-start;
+    }
+    .card-reg-open-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      animation: regPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes regPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.8)} }
+    .card-reg-open-badge-text {
+      font-size: .58rem; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--teal);
+    }
+    .card-reg-open-title {
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -.03em;
+      line-height: 1.2;
+    }
+    .card-reg-open-sub {
+      font-size: .85rem;
+      color: rgba(250,245,237,.5);
+      line-height: 1.5;
+    }
+    .card-reg-open-btn {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--teal);
+      color: var(--navy);
+      font-family: 'Montserrat', sans-serif;
+      font-size: .75rem; font-weight: 800;
+      letter-spacing: .08em; text-transform: uppercase;
+      border: none; border-radius: 100px;
+      padding: 14px 28px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .card-reg-open-btn:hover { background: #3de0ea; transform: translateY(-1px); }
+    @media (max-width: 600px) {
+      .card-reg-open { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+      .card-reg-open-btn { width: 100%; justify-content: center; }
+    }
+    .prep-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(48,205,215,.08);
+      border: 1px solid rgba(48,205,215,.12);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--teal); margin-bottom: 18px;
+    }
+    .prep-card-name {
+      font-size: .95rem; font-weight: 800;
+      color: var(--white); line-height: 1.3;
+      margin-bottom: 20px;
+    }
+    .prep-card-tag {
+      font-size: .55rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(48,205,215,.4);
+      display: flex; align-items: center; gap: 6px;
+    }
+    /* prep color variants */
+    .card-prep.gold-accent {
+      border-color: rgba(188,154,110,.14);
+      background: rgba(188,154,110,.022);
+    }
+    .card-prep.gold-accent:hover {
+      border-color: rgba(188,154,110,.28);
+      background: rgba(188,154,110,.055);
+      transform: translateY(-3px);
+    }
+    .card-prep.gold-accent .prep-card-icon {
+      background: rgba(188,154,110,.1);
+      border-color: rgba(188,154,110,.18);
+      color: var(--gold);
+    }
+    .card-prep.gold-accent .prep-card-tag { color: rgba(188,154,110,.5); }
+    .card-prep.gold-accent .card-label { color: var(--gold); }
+    .card-prep.red-accent {
+      border-color: rgba(255,55,80,.1);
+      background: rgba(255,55,80,.018);
+    }
+    .card-prep.red-accent:hover {
+      border-color: rgba(255,55,80,.22);
+      background: rgba(255,55,80,.042);
+      transform: translateY(-3px);
+    }
+    .card-prep.red-accent .prep-card-icon {
+      background: rgba(255,55,80,.08);
+      border-color: rgba(255,55,80,.14);
+      color: var(--red);
+    }
+    .card-prep.red-accent .prep-card-tag { color: rgba(255,55,80,.45); }
+    .card-prep.red-accent .card-label { color: var(--red); }
+
+    /* ── Guide cards (resources-style) in bento ── */
+    .bento-guide-card {
+      grid-column: span 3;
+      background: #020c14;
+      border: 1px solid rgba(48,205,215,.18);
+      border-radius: 20px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      box-shadow: 0 6px 32px rgba(0,0,0,.5);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .3s, transform .25s cubic-bezier(.2,.9,.3,1), box-shadow .3s;
+    }
+    .bento-guide-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(to bottom, rgba(0,5,15,.7) 0%, transparent 100%);
+      z-index: 1; pointer-events: none;
+      border-radius: 20px 20px 0 0;
+    }
+    .bento-guide-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,5,15,.95) 0%, rgba(0,5,15,.75) 28%, rgba(0,5,15,.3) 55%, transparent 100%);
+      z-index: 1; pointer-events: none;
+    }
+    .bento-guide-card:hover {
+      border-color: rgba(48,205,215,.45);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 55px rgba(0,0,0,.6), 0 0 0 1px rgba(48,205,215,.18), 0 0 60px rgba(48,205,215,.1);
+    }
+    .bento-guide-card .guide-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 20px;
+      z-index: 0; pointer-events: none;
+      transform-origin: center;
+      transition: transform .55s cubic-bezier(.2,.9,.3,1);
+    }
+    .bento-guide-card:hover .guide-bg { transform: scale(1.07); }
+    .bento-guide-card > *:not(.guide-bg) { position: relative; z-index: 2; }
+    .bento-guide-card .guide-type {
+      position: absolute;
+      top: 15px; left: 16px;
+      font-size: .48rem; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(250,245,237,.82);
+      background: rgba(0,10,25,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 100px;
+      padding: 5px 12px;
+    }
+    .bento-guide-card .guide-card-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .bento-guide-card .guide-name {
+      font-size: 1.25rem; font-weight: 900;
+      letter-spacing: -.03em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .bento-guide-card .guide-topic {
+      font-size: .7rem; font-weight: 500;
+      color: rgba(250,245,237,.45);
+      line-height: 1.5;
+    }
+    .bento-guide-card .guide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .bento-guide-card .guide-status {
+      font-size: .52rem; font-weight: 800;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--teal);
+    }
+    .bento-guide-card .guide-dl {
+      display: flex; align-items: center; gap: 5px;
+      font-size: .55rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .bento-guide-card .guide-dl:hover { color: var(--teal-light); }
+
+    /* ── EB cards ── */
+    .eb-row { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card-eb { padding: 0; overflow: hidden; display: flex; flex-direction: row; align-items: stretch; }
+    .eb-card-top {
+      width: clamp(220px, 32%, 320px);
+      flex-shrink: 0;
+      height: auto;
+      max-height: 340px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      background: linear-gradient(145deg,
+        rgba(48,205,215,.14) 0%,
+        rgba(0,48,87,.6) 100%);
+      border-right: 1px solid rgba(48,205,215,.12);
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px 0 0 12px;
+      transition: max-height .9s cubic-bezier(0.4,0,0.2,1), border-radius .9s cubic-bezier(0.4,0,0.2,1);
+    }
+    .card-eb.expanded-card .eb-card-top {
+      max-height: 2000px;
+      border-radius: 12px 0 0 12px;
+    }
+    .eb-card-top::before {
+      content: '';
+      position: absolute;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 1px solid rgba(48,205,215,.08);
+      top: -40px; right: -40px;
+    }
+    .eb-card-top::after {
+      content: '';
+      position: absolute;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(48,205,215,.06) 0%, transparent 70%);
+      bottom: -20px; left: 20px;
+    }
+    .eb-card-initials {
+      font-size: 5rem; font-weight: 900;
+      letter-spacing: -.1em;
+      color: rgba(48,205,215,.22);
+      line-height: 1;
+      position: relative; z-index: 1;
+    }
+    .eb-card-tba-label {
+      font-size: .5rem; font-weight: 800;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(250,245,237,.22);
+      position: relative; z-index: 1;
+    }
+    /* EB card role-color variants */
+    .card-eb.eb-chair .eb-card-top {
+      background: linear-gradient(145deg, rgba(48,205,215,.2) 0%, rgba(0,48,87,.55) 100%);
+      border-bottom-color: rgba(48,205,215,.2);
+    }
+    .card-eb.eb-chair .eb-card-initials { color: rgba(48,205,215,.35); }
+    .card-eb.eb-chair .eb-card-role { color: var(--teal); }
+    .card-eb.eb-vice .eb-card-top {
+      background: linear-gradient(145deg, rgba(188,154,110,.18) 0%, rgba(0,48,87,.55) 100%);
+      border-bottom-color: rgba(188,154,110,.18);
+    }
+    .card-eb.eb-vice .eb-card-initials { color: rgba(188,154,110,.38); }
+    .card-eb.eb-vice .eb-card-role { color: var(--gold); }
+    .card-eb.eb-rap .eb-card-top {
+      background: linear-gradient(145deg, rgba(180,235,245,.12) 0%, rgba(0,48,87,.55) 100%);
+      border-bottom-color: rgba(180,235,245,.12);
+    }
+    .card-eb.eb-rap .eb-card-initials { color: rgba(180,235,245,.3); }
+    .card-eb.eb-rap .eb-card-role { color: var(--teal-light); }
+    /* ── EB card with real photo/member ── */
+    .eb-card-photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      z-index: 0; opacity: .95;
+      transition: opacity .3s;
+    }
+    .card-eb:hover .eb-card-photo { opacity: 1; }
+    .eb-card-top.has-photo {
+      background: #010d1a !important;
+      border-right-color: rgba(48,205,215,.2);
+    }
+    .eb-card-top.has-photo .eb-card-initials,
+    .eb-card-top.has-photo .eb-card-tba-label { display: none; }
+    .eb-card-top.has-photo::before,
+    .eb-card-top.has-photo::after { display: none; }
+    .eb-card-top.has-photo {
+      background: none;
+      border-bottom-color: rgba(48,205,215,.25);
+    }
+    .card-eb.has-member .eb-card-name {
+      color: var(--white);
+      font-style: normal;
+    }
+    .card-eb.has-member .eb-card-desc {
+      color: rgba(250,245,237,.52);
+    }
+
+    .eb-card-body { padding: 20px 22px; display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+    .eb-card-name {
+      font-size: .95rem; font-weight: 800;
+      color: rgba(250,245,237,.28);
+      font-style: italic; letter-spacing: -.01em;
+    }
+    .card-eb.has-member .eb-card-name {
+      color: var(--white);
+      font-style: normal;
+    }
+    .eb-card-role {
+      font-size: .56rem; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 8px;
+    }
+    .eb-card-desc {
+      font-size: .7rem; line-height: 1.65;
+      color: rgba(250,245,237,.25);
+      max-height: 6.6em;
+      overflow: hidden;
+      transition: max-height .9s cubic-bezier(0.4,0,0.2,1);
+    }
+    .eb-card-desc.expanded {
+      max-height: 2000px;
+      transition: max-height .9s cubic-bezier(0.4,0,0.2,1);
+    }
+    .card-eb.has-member .eb-card-desc { color: rgba(250,245,237,.52); }
+    .eb-read-more {
+      background: none; border: none; padding: 0;
+      font-size: .63rem; font-weight: 700; letter-spacing: .06em;
+      color: var(--teal); cursor: pointer; margin-top: 6px;
+      text-transform: uppercase; align-self: flex-start;
+    }
+    .eb-read-more:hover { color: var(--teal-light); }
+
+    footer { background: #001223; padding: 72px 56px 0; position: relative; overflow: hidden; }
+    footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(48,205,215,.3), transparent); }
+    .footer-top { display: grid; grid-template-columns: 300px 1px 1fr 1fr 1fr; gap: 0 48px; padding-bottom: 64px; }
+    .footer-divider { background: rgba(250,245,237,.08); width: 1px; align-self: stretch; }
+    .footer-brand { display: flex; flex-direction: column; gap: 20px; padding-right: 16px; }
+    .footer-logo { width: 64px; height: 64px; object-fit: contain; filter: brightness(0) invert(1); opacity: .85; }
+    .footer-chapter { font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--white); }
+    .footer-desc { font-size: .82rem; line-height: 1.75; color: rgba(250,245,237,.4); }
+    .footer-col h4 { font-size: .65rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a { font-size: .85rem; font-weight: 500; color: rgba(250,245,237,.55); text-decoration: none; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--teal); }
+    .footer-contact-item { margin-bottom: 18px; }
+    .footer-contact-item p { font-size: .78rem; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: .04em; }
+    .footer-contact-item a { font-size: .82rem; color: var(--teal); text-decoration: none; transition: opacity .2s; }
+    .footer-contact-item a:hover { opacity: .75; }
+    .footer-contact-item span { font-size: .82rem; color: rgba(250,245,237,.4); line-height: 1.6; display: block; }
+    .footer-detail-item { margin-bottom: 18px; }
+    .footer-detail-item p { font-size: .78rem; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: .04em; }
+    .footer-detail-item span { font-size: .82rem; color: rgba(250,245,237,.4); font-style: italic; }
+    .footer-social { display: flex; gap: 12px; margin-top: 6px; }
+    .footer-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(250,245,237,.12); display: flex; align-items: center; justify-content: center; color: rgba(250,245,237,.4); text-decoration: none; transition: border-color .2s, color .2s, background .2s; }
+    .footer-social a:hover { border-color: var(--teal); color: var(--teal); background: rgba(48,205,215,.08); }
+    .footer-social svg { width: 15px; height: 15px; fill: currentColor; }
+    .footer-bottom { border-top: 1px solid rgba(250,245,237,.06); padding: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+    .footer-bottom p { font-size: .7rem; font-weight: 500; color: rgba(250,245,237,.25); letter-spacing: .04em; }
+    .footer-bottom a { color: var(--teal); text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; padding-top: 120px; }
+      .hero-panel { min-height: 280px; }
+      .bento { grid-template-columns: repeat(2, 1fr); padding: 24px 24px 72px; }
+      .card-overview { grid-column: 1/-1; grid-template-columns: 1fr; gap: 20px; }
+      .card-prep { grid-column: 1 / -1; }
+      .eb-row { grid-template-columns: repeat(3, 1fr); }
+      .card-agenda { grid-template-columns: 1fr; gap: 20px; }
+      .card-agenda.has-agenda { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      html { zoom: 1; }
+      nav { top: 10px; }
+      .nav-pill { padding: 8px 14px 8px 14px; }
+      .nav-center { display: none; }
+      .nav-right .nav-cta { display: none; } .nav-right > a { display: none !important; }
+      .nav-right { margin-left: 10px; max-width: 52px; }
+      .menu-btn { opacity: 1; pointer-events: auto; }
+      nav.scrolled .nav-logo  { opacity: 1; max-width: 220px; }
+      nav.scrolled .nav-right { opacity: 1; max-width: 52px; margin-left: 10px; }
+      nav.scrolled .nav-pill  { padding: 8px 14px 8px 14px; border-radius: 100px; }
+      .hero { min-height: 65vh; margin: 8px; border-radius: 18px; }
+      .hero-content { padding: 88px 22px 44px; }
+      .back-link { font-size: .58rem; padding: 7px 13px 7px 10px; white-space: nowrap; margin-bottom: 0; top: 88px; left: 22px; }
+      .committee-title { font-size: clamp(3rem, 17vw, 5.5rem); }
+      .committee-subtitle { font-size: .85rem; }
+      .bento { grid-template-columns: 1fr; padding: 16px 16px 60px; gap: 10px; }
+      .card-overview, .card-agenda,
+      .card-prep { grid-column: 1 / -1; }
+      .eb-row { grid-template-columns: 1fr; }
+      .card-overview { grid-template-columns: 1fr; gap: 16px; }
+      footer { padding: 48px 20px 0; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px 0; }
+      .footer-divider { display: none; }
+      .footer-bottom { flex-direction: column; gap: 8px; padding: 20px 0; }
+    }
+
+    /* ── keep old classes referenced but unused ── */
+    .page-content { display: none; }
+    .content-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      padding: 72px 0;
+      border-top: 1px solid rgba(250,245,237,.07);
+      position: relative;
+    }
+
+    .row-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 6px;
+    }
+    .row-num {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: -.05em;
+      line-height: 1;
+      color: rgba(250,245,237,.05);
+    }
+    .row-label {
+      font-size: .58rem;
+      font-weight: 800;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .row-body { min-width: 0; }
+
+    /* ── OVERVIEW ── */
+    .row-body h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: -.04em;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .row-body p {
+      font-size: .95rem;
+      line-height: 1.85;
+      color: rgba(250,245,237,.5);
+    }
+
+    /* ── AGENDA ── */
+    .agenda-head-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .tba-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,55,80,.09);
+      border: 1px solid rgba(255,55,80,.2);
+      border-radius: 100px; padding: 7px 16px;
+      flex-shrink: 0;
+    }
+    .tba-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); }
+    .tba-text {
+      font-size: .58rem; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--red);
+    }
+    .agenda-list { list-style: none; }
+    .agenda-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(250,245,237,.06);
+      cursor: default;
+      transition: padding-left .25s;
+    }
+    .agenda-list li:first-child { border-top: 1px solid rgba(48,205,215,.15); }
+    .agenda-list li:hover { padding-left: 6px; }
+    .agenda-n {
+      font-size: .7rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      color: var(--teal);
+      width: 52px;
+      flex-shrink: 0;
+      padding-top: 5px;
+    }
+    .agenda-t {
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      font-weight: 800;
+      line-height: 1.4;
+      color: rgba(250,245,237,.95);
+      transition: color .2s;
+      letter-spacing: -.02em;
+    }
+    .agenda-list li:hover .agenda-t { color: #fff; }
+
+    /* ── PREP MATERIALS ── */
+    .prep-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .prep-card {
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(250,245,237,.07);
+      border-radius: 14px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-decoration: none;
+      transition: border-color .22s, background .22s, transform .22s;
+    }
+    .prep-card:hover {
+      border-color: rgba(48,205,215,.2);
+      background: rgba(48,205,215,.04);
+      transform: translateY(-3px);
+    }
+    .prep-icon {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      background: rgba(48,205,215,.08);
+      border: 1px solid rgba(48,205,215,.12);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--teal);
+    }
+    .prep-name {
+      font-size: .85rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.3;
+      flex: 1;
+    }
+    .prep-tag {
+      font-size: .55rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(48,205,215,.4);
+    }
+
+    /* ── EXECUTIVE BOARD ── */
+    .eb-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .eb-card {
+      border-radius: 16px;
+      border: 1px solid rgba(250,245,237,.07);
+      overflow: hidden;
+      transition: border-color .22s, transform .22s;
+    }
+    .eb-card:hover { border-color: rgba(48,205,215,.15); transform: translateY(-2px); }
+    .eb-photo {
+      aspect-ratio: 3/2;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      background: rgba(255,255,255,.025);
+      border-bottom: 1px solid rgba(250,245,237,.06);
+    }
+    .eb-initials {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -.06em;
+      color: rgba(48,205,215,.18);
+    }
+    .eb-photo-tba {
+      font-size: .5rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(250,245,237,.15);
+    }
+    .eb-body { padding: 20px; }
+    .eb-role {
+      font-size: .58rem; font-weight: 800;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 8px;
+    }
+    .eb-name {
+      font-size: .88rem; font-weight: 700;
+      color: rgba(250,245,237,.35);
+      font-style: italic; margin-bottom: 12px;
+    }
+    .eb-desc {
+      font-size: .72rem; line-height: 1.65;
+      color: rgba(250,245,237,.28);
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; padding-top: 120px; }
+      .hero-panel { min-height: 360px; }
+      .content-row { grid-template-columns: 1fr; gap: 28px; }
+      .row-num { display: none; }
+      .prep-grid { grid-template-columns: 1fr 1fr; }
+      .eb-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero { min-height: 65vh; margin: 8px; border-radius: 18px; }
+      .hero-content { padding: 88px 22px 44px; }
+      .back-link { font-size: .58rem; padding: 7px 13px 7px 10px; white-space: nowrap; margin-bottom: 0; top: 88px; left: 22px; }
+      .committee-title { font-size: clamp(3rem, 17vw, 5.5rem); }
+      .committee-subtitle { font-size: .85rem; }
+      .page-content { padding: 0 20px 72px; }
+      .content-row { padding: 48px 0; }
+      .prep-grid, .eb-grid { grid-template-columns: 1fr; }
+      footer { padding: 48px 20px 0; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px 0; }
+      .footer-divider { display: none; }
+      .footer-bottom { flex-direction: column; gap: 8px; padding: 20px 0; }
+
+      /* ── EB cards mobile ── */
+      .eb-row { grid-template-columns: 1fr !important; gap: 10px; }
+      .card-eb { flex-direction: column; }
+      .eb-card-top { width: 100%; height: 220px; min-height: 0; border-right: none; border-bottom: 1px solid rgba(48,205,215,.15); }
+      .eb-card-body { padding: 16px 18px; }
+      .eb-card-name { font-size: 1rem; }
+      .eb-card-role { font-size: .6rem; margin-bottom: 6px; }
+      .eb-card-desc { font-size: .74rem; line-height: 1.6; }
+    }
+  
+    .nav-has-drop { position: relative; list-style: none; }
+    .nav-has-drop > a::after { content: ' ▾'; font-size: .5em; opacity: .55; }
+    .nav-drop {
+      position: absolute; top: calc(100% + 18px); left: 50%;
+      transform: translateX(-50%) translateY(-6px); width: 320px;
+      background: rgba(3,10,22,.97); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(48,205,215,.15); border-radius: 16px; padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s .55s cubic-bezier(0.4,0,0.2,1), transform .3s .55s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(48,205,215,.06); z-index: 300;
+    }
+    .nav-drop::before { content: ''; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+    .nav-has-drop:hover .nav-drop { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); transition-delay: 0s; }
+    .nav-drop-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+    .nav-drop-item {
+      font-size: .58rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: rgba(250,245,237,.55) !important; text-decoration: none; padding: 7px 8px;
+      border-radius: 6px; transition: background .15s, color .15s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .nav-drop-item:hover { background: rgba(48,205,215,.1); color: var(--teal) !important; }
+    .nav-drop-reserved { color: rgba(188,154,110,.55) !important; }
+    .nav-drop-reserved:hover { background: rgba(188,154,110,.08); color: #BC9A6E !important; }
+    .nav-drop-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(250,245,237,.07);
+      font-size: .54rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .nav-drop-footer span { color: rgba(250,245,237,.25); }
+    .nav-drop-footer a { color: var(--teal); text-decoration: none; }
+    .nav-drop-footer a:hover { opacity: .75; }
+    .nav-drop--events { width: 210px; left: auto; right: 0; transform: translateY(-6px); }
+    .nav-has-drop:hover .nav-drop--events { transform: translateY(0); transition-delay: 0s; }
+    .nav-drop--events .nav-drop-grid { grid-template-columns: 1fr; }
+    .nav-drop--events .nav-drop-item {
+      font-size: .62rem; padding: 9px 10px 9px 14px;
+      border-left: 2px solid transparent;
+      transition: background .2s, color .2s, border-color .2s, padding-left .2s;
+    }
+    .nav-drop--events .nav-drop-item:hover {
+      background: rgba(48,205,215,.1); color: var(--teal) !important;
+      border-left-color: var(--teal); padding-left: 18px;
+    }
+
+    /* ── ORBS ── */
+    @keyframes orb-a { from{transform:translate(0,0) scale(1)} to{transform:translate(7%,11%) scale(1.14)} }
+    @keyframes orb-b { from{transform:translate(0,0) scale(1)} to{transform:translate(-9%,-7%) scale(0.87)} }
+    @keyframes orb-c { from{transform:translate(0,0) scale(1)} to{transform:translate(15%,6%) scale(1.09)} }
+    .pg-orb {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(60px);
+    }
+    .pg-orb-a {
+      width: 65vw; height: 60vh; top: -10vh; left: -10vw;
+      background: radial-gradient(circle, rgba(30,150,165,.20) 0%, transparent 70%);
+      animation: orb-a 20s ease-in-out infinite alternate;
+    }
+    .pg-orb-b {
+      width: 55vw; height: 55vh; bottom: 0vh; right: -8vw;
+      background: radial-gradient(circle, rgba(0,60,110,.38) 0%, transparent 70%);
+      animation: orb-b 25s ease-in-out infinite alternate;
+    }
+    .pg-orb-c {
+      width: 45vw; height: 45vh; top: 35vh; left: 25vw;
+      background: radial-gradient(circle, rgba(48,205,215,.10) 0%, transparent 70%);
+      animation: orb-c 30s ease-in-out infinite alternate;
+    }
+    /* Keep content above fixed orbs */
+    .page-content, .bento,
+    section, footer { position: relative; z-index: 1; }
+    /* Nav is already position:fixed — just bump z-index above orbs */
+    nav { z-index: 200; }
+        @media (prefers-reduced-motion: reduce) {
+      .pg-orb { animation: none !important; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .sr { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(0.4,0,0.2,1), transform .7s cubic-bezier(0.4,0,0.2,1); }
+    .sr.sr-visible { opacity: 1; transform: translateY(0); }
+    .sr-d1 { transition-delay: .1s; }
+    .sr-d2 { transition-delay: .2s; }
+    .sr-d3 { transition-delay: .3s; }
+    .sr-d4 { transition-delay: .4s; }
+    /* ── MOBILE PERF: solid nav, no backdrop blur ── */
+    @media (max-width: 768px) {
+      .nav-pill { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(1,3,8,.99) !important; }
+      .nav-drop { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(3,12,26,.98) !important; }
+      .mobile-nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+      .pg-orb, .page-hero-orb { filter: blur(30px) !important; }
+    }
+  
+    /* Register dropdown */
+    .nav-reg-wrap { position: relative; display: inline-block; }
+    .nav-cta-chevron { display: inline-block; margin-left: 4px; font-size: .65em; vertical-align: middle; transition: transform .3s .55s cubic-bezier(0.4,0,0.2,1); }
+    .nav-reg-wrap:hover .nav-cta-chevron { transform: rotate(180deg); transition-delay: 0s; transition-duration: .3s; }
+    .nav-drop--reg { width: 210px; left: auto; right: 0; transform: translateY(-6px); }
+    .nav-reg-wrap:hover .nav-drop--reg { opacity: 1; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
+    .nav-drop--reg .nav-drop-reg-item { display: block; text-decoration: none; font-family: Montserrat, sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: rgba(250,245,237,.6); padding: 9px 10px 9px 14px; border-left: 2px solid transparent; border-radius: 6px; transition: background .2s, color .2s, border-color .2s, padding-left .2s; }
+    .nav-drop--reg .nav-drop-reg-item:hover { background: rgba(48,205,215,.1); color: var(--teal); border-left-color: var(--teal); padding-left: 18px; }
+    .nav-drop--reg .nav-drop-reg-sub { display: block; font-size: .52rem; font-weight: 500; text-transform: none; letter-spacing: 0; opacity: .5; margin-top: 2px; }
+  
+    .mobile-reg-accordion { display: flex; flex-direction: column; width: 100%; margin-top: 8px; }
+    .mobile-reg-accordion .mobile-nav-cta { width: 100%; background: linear-gradient(135deg, #30CDD7 0%, #1E96A5 100%); color: #003057 !important; border: none; border-radius: 12px; padding: 14px 0; font-family: 'Montserrat'; font-size: .88rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: filter .2s; }
+    .mobile-reg-accordion .mobile-nav-cta:active { filter: brightness(.9); }
+    .mobile-reg-options { display: none; flex-direction: column; gap: 8px; margin-top: 12px; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 12px; }
+    .mobile-reg-accordion.open .mobile-reg-options { display: flex; }
+    .mobile-reg-options a { padding: 10px !important; font-size: .75rem !important; text-align: center; border: 1px solid rgba(48,205,215,.2) !important; border-radius: 8px; background: rgba(48,205,215,.05); margin: 0 !important; }
+    .mobile-reg-options a:hover { background: rgba(48,205,215,.15); }
+
+    /* ── VIEW TRANSITIONS ── */
+    @view-transition { navigation: auto; }
+
+    #heroSection { view-transition-name: committee-hero; }
+
+    ::view-transition-group(committee-hero) {
+      animation-duration: 750ms;
+      animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    }
+    ::view-transition-old(committee-hero) { animation: 400ms cubic-bezier(0.4,0,1,1) forwards vt-fade-out; }
+    ::view-transition-new(committee-hero) { animation: 400ms cubic-bezier(0.2,0,0,1) 200ms both vt-fade-in; }
+    @keyframes vt-fade-out { to { opacity: 0; } }
+    @keyframes vt-fade-in  { from { opacity: 0; } to { opacity: 1; } }
+
+    ::view-transition-old(root) { animation: 350ms cubic-bezier(0.4,0,1,1) forwards vt-root-out; }
+    ::view-transition-new(root) { animation: none; }
+    @keyframes vt-root-out { to { opacity: 0; filter: blur(8px); transform: scale(0.97); } }
+
+    #heroSection.vt-hold .sr { opacity: 0 !important; transform: translateY(26px) !important; transition: none !important; }
+
+  </style>
+
+  <style>
+    @keyframes sponsor-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-100% / 3)); }
+    }
+    .sponsors-hero {
+      background: linear-gradient(180deg, #03080f 0%, #05101f 100%);
+      padding: 38px 0 46px;
+      overflow: hidden;
+      position: relative;
+    }
+    .sponsors-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 90px;
+      background: linear-gradient(to bottom, rgba(39,176,189,.18), transparent);
+      pointer-events: none;
+      opacity: .5;
+    }
+    .sponsors-heading {
+      text-align: center;
+      font-family: 'Montserrat';
+      font-size: clamp(.82rem, 1.6vw, 1.1rem);
+      font-weight: 900;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 26px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 16px rgba(0,0,0,.6);
+    }
+    .sponsors-featured {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 34px;
+      position: relative;
+      z-index: 1;
+    }
+    .sponsors-featured-card img {
+      height: 120px;
+      width: auto;
+      max-width: 360px;
+      object-fit: contain;
+      display: block;
+      opacity: 1;
+      transition: opacity .2s ease, transform .2s ease;
+      border-radius: 12px;
+      padding: 16px;
+      background: rgba(30, 150, 165, 0.2);
+    }
+    .sponsors-featured-card:hover img {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    .sponsors-marquee {
+      overflow: hidden;
+      width: 100%;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+    }
+    .sponsors-track {
+      display: flex;
+      align-items: center;
+      gap: 70px;
+      width: max-content;
+      padding: 0 28px;
+      animation: sponsor-scroll 65s linear infinite;
+      will-change: transform;
+    }
+    @media (prefers-reduced-motion: reduce) { .sponsors-track { animation: none; } }
+    .sponsor-logo img {
+      height: 100px;
+      width: auto;
+      max-width: 200px;
+      object-fit: contain;
+      display: block;
+      opacity: 1;
+      transition: opacity .2s ease, transform .2s ease;
+      border-radius: 10px;
+      padding: 12px;
+      background: rgba(48, 205, 215, 0.15);
+    }
+    .sponsor-logo:hover img {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .sponsors-featured-card img { height: 46px; max-width: 260px; }
+      .sponsor-logo img { height: 50px; max-width: 140px; }
+      .sponsors-track { gap: 50px; }
+      .sponsors-hero { padding: 30px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    window.__vtRan = false;
+    window.addEventListener('pagereveal', function (e) {
+      if (!e.viewTransition) return;
+      window.__vtRan = true;
+      var heroSection = document.getElementById('heroSection');
+      if (!heroSection) return;
+      heroSection.classList.add('vt-hold');
+      e.viewTransition.ready.then(function () {
+        setTimeout(function () {
+          heroSection.classList.remove('vt-hold');
+          heroSection.querySelectorAll('.sr').forEach(function (el) {
+            el.style.transition = '';
+            el.classList.add('sr-visible');
+          });
+        }, 780);
+      });
+    });
+    /* Fallback for browsers without cross-document VT (Safari, Firefox):
+       if pagereveal never fired with a viewTransition, animate the hero in. */
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.__vtRan) return;
+      var heroSection = document.getElementById('heroSection');
+      if (heroSection) heroSection.classList.add('mobile-enter');
+    });
+  </script>
+
+  <!-- Page ambient orbs -->
+  <div class="pg-orb pg-orb-a"></div>
+  <div class="pg-orb pg-orb-b"></div>
+  <div class="pg-orb pg-orb-c"></div>
+
+    <!-- Mobile nav drawer -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="/">Home</a>
+    <a href="/committees.html">Committees</a>
+    <a href="/secretariat.html">Secretariat</a>
+    <a href="/#schedule">Schedule</a>
+    <a href="/resources.html">Resources</a>
+    <a href="/allocations.html">Allocations</a>
+    <a href="/social-night.html">Social Night</a>
+    <a href="/networking-hour.html">Networking Hour</a>
+    <a href="/orphanage-initiative.html">Community Outreach</a>
+    
+    <a href="/qr-lookup.html" class="mobile-nav-cta" style="text-decoration:none;">Get Your QR Code</a>
+
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-pill">
+      <a class="nav-logo" href="/">Oakridge <span>MUN</span></a>
+      <div class="nav-center">
+        <ul class="nav-links-group left">
+          <li><a href="/committees.html" class="active">Committees</a></li>
+          <li><a href="/secretariat.html">Secretariat</a></li>
+          <li><a href="/allocations.html">Allocations</a></li>
+        </ul>
+        <div class="nav-mark"><img src="/assets/logo-OoOpTRjq.png" alt="Oakridge MUN" /></div>
+        <ul class="nav-links-group right">
+          <li><a href="/#schedule">Schedule</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li class="nav-has-drop"><a href="#">Other</a>
+            <div class="nav-drop nav-drop--events">
+              <div class="nav-drop-grid">
+                <a class="nav-drop-item" href="/social-night.html">Social Night</a>
+                <a class="nav-drop-item" href="/networking-hour.html">Networking Hour</a>
+                <a class="nav-drop-item" href="/orphanage-initiative.html">Community Outreach</a>
+                <a class="nav-drop-item" href="/delegation-guidelines.html">Delegation Guidelines</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        <button class="nav-cta" onclick="window.location.href='/qr-lookup.html'">Get Your QR Code</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="heroSection">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-top">
+        <a class="back-link sr" href="/committees.html">Back to Committees</a>
+      </div>
+      <div class="hero-bottom">
+        <div class="hero-rule sr"></div>
+        <p class="committee-kicker sr sr-d1" id="committeeType">Committee</p>
+        <h1 class="committee-title sr sr-d2" id="committeeTitle">DISEC</h1>
+        <p class="committee-subtitle sr sr-d3" id="committeeSubtitle"></p>
+      </div>
+    </div>
+    <div class="hero-panel" id="heroPanel" style="display:none">
+      <span id="panelLabel"></span><strong id="panelCode"></strong>
+    </div>
+  </section>
+
+  <div class="bento">
+
+    <!-- OVERVIEW -->
+    <div class="card card-overview">
+      <div>
+        <span class="card-label">Overview</span>
+        <div class="overview-left-title" id="overviewTitle"></div>
+      </div>
+      <div>
+        <p class="overview-right-text" id="overviewText"></p>
+      </div>
+      <div class="card-overview-ghost" id="overviewGhost"></div>
+    </div>
+
+    <!-- AGENDA -->
+    <div class="card card-agenda">
+      <div>
+        <span class="card-label">Agenda</span>
+        <div class="agenda-left-head">Committee<br>Agenda</div>
+      </div>
+      <div class="agenda-right-meta">
+        <div class="agenda-right-title">Agenda Items</div>
+        <div class="agenda-right-note">The agenda topics for this committee will be announced closer to the conference. Check back soon for updates.</div>
+        <div class="tba-pill">
+          <span class="tba-pill-dot"></span>
+          <span class="tba-pill-text">To be announced</span>
+        </div>
+      </div>
+      <div class="agenda-ghost">TBA</div>
+    </div>
+
+    <!-- PREP CARDS -->
+    <div id="prepCards"></div>
+
+    <!-- EB CARDS -->
+    <div id="ebCards"></div>
+
+  </div>
+
+  <!-- ═══ OUR SPONSORS ═══ -->
+  <section class="sponsors-hero">
+    <h2 class="sponsors-heading">Our Sponsors</h2>
+    <div class="sponsors-featured">
+      <div class="sponsors-featured-card">
+        <img src="/sponsors/Athena logo.svg" alt="Athena — Principal Sponsor" />
+      </div>
+    </div>
+    <div class="sponsors-marquee">
+      <div class="sponsors-track">
+        <div class="sponsor-logo"><img src="/sponsors/DSRlogo.svg" alt="DSR" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Game Hub logo.svg" alt="Game Hub" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/League logo.svg" alt="League" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Royalton hotels logo.svg" alt="Royalton Hotels" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/RSRM steel logo.svg" alt="RSRM Steel" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Snow Kingdom logo.svg" alt="Snow Kingdom" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/DSRlogo.svg" alt="DSR" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Game Hub logo.svg" alt="Game Hub" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/League logo.svg" alt="League" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Royalton hotels logo.svg" alt="Royalton Hotels" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/RSRM steel logo.svg" alt="RSRM Steel" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Snow Kingdom logo.svg" alt="Snow Kingdom" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/DSRlogo.svg" alt="DSR" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Game Hub logo.svg" alt="Game Hub" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/League logo.svg" alt="League" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Royalton hotels logo.svg" alt="Royalton Hotels" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/RSRM steel logo.svg" alt="RSRM Steel" /></div>
+        <div class="sponsor-logo"><img src="/sponsors/Snow Kingdom logo.svg" alt="Snow Kingdom" /></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <img src="/assets/logo-OoOpTRjq.png" alt="Oakridge MUN Logo" class="footer-logo" />
+        <p class="footer-chapter">Chapter XVI</p>
+        <p class="footer-desc">Oakridge Model United Nations brings together passionate delegates from across the high schools of India for three days of diplomatic excellence.</p>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/#schedule">Schedule</a>
+    <a href="/allocations.html">Allocations</a></li>
+          <li><a href="https://forms.office.com/r/kdyTBHKxE7" target="_blank" rel="noopener">International Press</a></li>
+          <li><a href="#">Allocations</a></li>
+          <li><a href="/#faq">FAQs</a></li>
+          <li><a href="/committees.html">Explore Committees</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item">
+          <p>General Enquiries</p>
+          <a href="/cdn-cgi/l/email-protection#3c5149527c535d574e55585b59125552"><span class="__cf_email__" data-cfemail="1578607b557a747e677c7172703b7c7b">[email&#160;protected]</span></a>
+        </div>
+        <div class="footer-contact-item">
+          <p>Location</p>
+          <span>Oakridge International School<br>Hyderabad, India</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Event Details</h4>
+        <div class="footer-detail-item">
+          <p>Dates</p>
+          <span style="font-style:normal;">24th July – 26th July, 2026</span>
+        </div>
+        <div class="footer-detail-item">
+          <p>Theme</p>
+          <span>"Create. Debate. Innovate."</span>
+        </div>
+        <div class="footer-detail-item">
+          <p>Connect With Us</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/oakmun/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <p>2026 Oakridge International School. All rights reserved.</p>
+      <p>Website designed and developed by <a href="https://www.instagram.com/srijai_kodali/" target="_blank" rel="noopener">Srijai Kodali</a></p>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const committees = {
+      'disec': ['DISEC', 'DI', 'Committee', 'Disarmament and security', 'DISEC asks delegates to negotiate the balance between national defence, arms control, and international peace. Expect technical policy, principled blocs, and careful drafting.', ['Reforming Disarmament, Demobilization, and Reintegration (DDR) Programs to Tackle the Emergence of Violent Extremist Groups in Post-Conflict Societies'], ['Background Guide']],
+      'unsc': ['UNSC', 'UN', 'Council', 'Security council', 'The UNSC is built for urgent diplomacy. Delegates respond to live threats, draft binding action, and defend national interests under pressure.', ['Assistance to States for Curbing the Illicit Traffic in Small Arms and Light Weapons'], ['Background Guide']],
+      'unhrc': ['UNHRC', 'HR', 'Committee', 'Human rights council', 'UNHRC centers human dignity, accountability, and protection. The committee rewards strong legal grounding and persuasive moral clarity.', ['Addressing Human Rights Violations Resulting from Foreign Intervention in Domestic Political Processes, including Enforced Disappearances, Political Assassinations, and State-Sponsored Abductions'], ['Background Guide']],
+      'jcc-1': ['JCC-1', 'J1', 'Crisis', 'Joint crisis cabinet', 'JCC-1 is a fast-moving crisis cabinet where strategy, directives, and negotiation collide in real time.', ['The Grand Alliance at Tehran — Finishing the War and Shaping the Post-War World, November 1943'], ['Background Guide']],
+      'jcc-2': ['JCC-2', 'J2', 'Crisis', 'Joint crisis cabinet', 'JCC-2 runs opposite the first cabinet, creating a competitive crisis environment shaped by bold choices and quick adaptation.', ['The Grand Alliance at Tehran — Finishing the War and Shaping the Post-War World, November 1943'], ['Background Guide']],
+      'hcc': ['HCC', 'HC', 'Cabinet', 'Historic crisis committee', 'HCC reopens a decisive historical moment and gives delegates the power to redirect events through policy and crisis action.', ['Afghanistan — The Situation as of 25 December 1979'], ['Background Guide']],
+      'lok-sabha': ['LOK SABHA', 'LS', 'Assembly', 'Indian parliament', 'Lok Sabha brings parliamentary procedure, coalition-building, and national policy debate to the floor.', ['<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:16px;font-size:0.85em;opacity:0.7;line-height:1.9;"><span><strong style="opacity:1;color:var(--teal);">Session Type</strong> &nbsp;Special Session</span><span><strong style="opacity:1;color:var(--teal);">Freeze Date</strong> &nbsp;April 16, 2026</span><span><strong style="opacity:1;color:var(--teal);">Business</strong> &nbsp;Legislative / Government Business</span><span><strong style="opacity:1;color:var(--teal);">Duration</strong> &nbsp;Two days: April 16, 2026, to April 17, 2026</span></div>Introduction of the following bills and the subsequent discussion on relevant rules thereof:<div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;padding-left:1.6em;border-left:2px solid rgba(48,205,215,0.3);"><span>The Constitution (131st Amendment) Bill, 2026</span><span>The Union Territories Laws (Amendment) Bill, 2026</span><span>The Delimitation Bill, 2026</span></div><div style="margin-top:14px;opacity:0.65;font-size:0.88em;line-height:1.8;">Introduction by: Shri Arjun Ram Meghwal, Minister for Law and Justice, Government of India.</div>'], ['Background Guide']],
+      'armageddon': ['ARMAGEDDON', 'AR', 'Crisis', 'High-stakes crisis room', 'Armageddon is designed for delegates who like pressure. Every choice has consequences, and survival depends on coordination.', ['The Emergence of Artificial Superintelligence and the Crisis of Global Governance'], ['Background Guide']],
+      'un-women': ['UN WOMEN', 'UW', 'Committee', 'UN Women', 'UN Women challenges delegates to convert rights-based commitments into practical protection, funding, and implementation.', ['Addressing Emerging Threats to SDG Target 5.2: Creating Global Regulatory Standards to Combat Tech-Facilitated Gender-Based Violence and Digital Exploitation'], ['Background Guide']],
+      'copuos': ['COPUOS', 'CO', 'Committee', 'Outer space affairs', 'COPUOS takes debate beyond Earth, covering security, sustainability, and access in the new space age.', ['Deliberation on Debris Mitigation in Outer Space, with an Emphasis on New Space Junk'], ['Background Guide']],
+      'us-senate': ['US SENATE', 'US', 'Senate', 'Legislative chamber', 'The US Senate rewards legislative strategy, party discipline, and sharp negotiation across a divided chamber.', ['Deliberating upon the Oversight of the United States Intelligence Community, with a View to Strengthening Congressional Oversight and Accountability'], ['Background Guide']],
+      'bilderberg': ['BILDERBERG', 'BI', 'Forum', 'Global strategy table', 'Bilderberg is a closed-door forum for elite negotiation, long-range strategy, and discreet influence.', [], ['Background Guide']],
+      'ecofin': ['ECOFIN', 'EC', 'Committee', 'Economic and financial', 'ECOFIN places delegates at the center of financial systems, development policy, and global economic cooperation.', ['Enhancing International Financial Cooperation to Address Illicit Financial Flows and Strengthen Domestic Resource Mobilization'], ['Background Guide']],
+      'icj-irmct-ccpcj': ['ICJ / IRMCT / CCPCJ', 'ICJ', 'Legal', 'Courts and justice', 'This legal committee is built for delegates who enjoy precedent, argument, and procedural precision.', [], ['Background Guide']],
+      'fifa': ['FIFA', 'FI', 'Federation', 'Global football governance', 'FIFA blends sport, politics, ethics, and global governance into a committee about power on and off the pitch.', ['Maintaining Football Neutrality Amid Growing Geopolitical Tensions and International Conflicts'], ['Background Guide']],
+      'who': ['WHO', 'WH', 'Agency', 'World health organization', 'WHO is for delegates ready to work through public health coordination, equity, and emergency response.', ['Addressing Communicable and Non-Communicable Disease Risks Faced by Prisoners, with an Emphasis on Prison Health System Reforms and Policy'], ['Background Guide']],
+      'unga-sochum': ['UNGA - SOCHUM', 'UG', 'Assembly', 'Social and humanitarian', 'SOCHUM focuses on social development and humanitarian protection, with broad debate and coalition-building.', ['Promotion and Protection of the Rights of Children'], ['Background Guide']],
+      'tsppm': ['TSPPM', 'TS', 'Press', 'Media and reportage', 'TSPPM gives delegates the press room: reporting, framing, interviewing, and shaping the story of the conference.', [], ['Background Guide']],
+      'ip': ['IP', 'IP', 'Press', 'International press', 'International Press turns the conference into a newsroom, where observation and analysis become public record.', [], ['Background Guide']],
+      'unodc': ['UNODC', 'UD', 'Agency', 'Drugs and crime', 'UNODC places delegates at the intersection of law enforcement, policy, and human rights — tackling the global challenge of drugs, crime, and corruption.', ['Institutional Architecture and the Human Rights Dimension of Criminal Justice Responses to Terrorism'], ['Background Guide']]
+    };
+
+    const palette = ['var(--teal)', 'var(--teal-light)', 'var(--teal-dark)', 'var(--red)', 'var(--teal)', 'var(--teal-light)', 'var(--teal-dark)', 'var(--red)'];
+    const params = new URLSearchParams(window.location.search);
+    // Support clean URL (/committees/unsc) and legacy query param (?committee=unsc)
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    const key = params.get('committee') || pathSegments[pathSegments.length - 1] || 'disec';
+    const data = committees[key] || committees.disec;
+    const [name, code, type, subtitle, overview, agenda, resources] = data;
+    const colorIndex = Object.keys(committees).indexOf(key);
+
+    document.title = `${name} - Oakridge MUN XVI`;
+    document.getElementById('committeeType').textContent = type;
+    document.getElementById('committeeTitle').textContent = name;
+    document.getElementById('committeeSubtitle').textContent = subtitle;
+    document.getElementById('panelLabel').textContent = type;
+
+    // Panel code: show full name, size by length
+    const panelCodeEl = document.getElementById('panelCode');
+    panelCodeEl.textContent = name;
+    if (name.length > 8) panelCodeEl.classList.add('long');
+    else if (name.length > 5) panelCodeEl.classList.add('med');
+
+    document.getElementById('overviewTitle').textContent = `${name} overview`;
+    document.getElementById('overviewText').textContent = overview;
+    document.getElementById('heroPanel').style.setProperty('--tile-a', palette[colorIndex % palette.length]);
+    document.getElementById('heroPanel').style.setProperty('--tile-b', palette[(colorIndex + 2) % palette.length]);
+
+    // Inject committee photo if available
+    const photos = {
+      'disec':     'disec.webp',
+      'unsc':      'unsc.webp',
+      'unhrc':     'unhrc.webp',
+      'jcc-1':     'jcc-1.webp',
+      'jcc-2':     'jcc-2.webp',
+      'hcc':       'hcc.webp',
+      'lok-sabha': 'lok_sabha.webp',
+      'armageddon':'armageddon.webp',
+      'un-women':  'un_woman.webp',
+      'copuos':    'copous.webp',
+      'us-senate': 'us_senate.webp',
+      'ecofin':    'ecofin.webp',
+      'fifa':      'fifa.webp',
+      'who':       'who.webp',
+      'ip':        'IP.webp',
+      'unodc':     'unodc.webp',
+    };
+    if (photos[key]) {
+      const hero = document.getElementById('heroSection');
+      const img = document.createElement('img');
+      img.className = 'hero-bg';
+      img.src = `/committee_photos/${photos[key]}`;
+      img.alt = '';
+      hero.prepend(img);
+    }
+
+    // overview
+    document.getElementById('overviewTitle').textContent = `${name} overview`;
+    document.getElementById('overviewText').textContent = overview;
+    document.getElementById('overviewGhost').textContent = code;
+
+    // agenda
+    if (agenda && agenda.length > 0) {
+      const agendaCard = document.querySelector('.card-agenda');
+      agendaCard.classList.add('has-agenda');
+      const rightMeta = agendaCard.querySelector('.agenda-right-meta');
+      const ghost = agendaCard.querySelector('.agenda-ghost');
+      rightMeta.innerHTML = `
+        <div class="agenda-right-title">Agenda Item${agenda.length > 1 ? 's' : ''}</div>
+        <ul class="agenda-list">
+          ${agenda.map((item, i) => `
+            <li>
+              <span class="agenda-n">${String(i + 1).padStart(2, '0')}</span>
+              <span class="agenda-t">${item}</span>
+            </li>`).join('')}
+        </ul>`;
+      ghost.textContent = code;
+    }
+
+    // registration open cards (committee key → form URL)
+    const registerUrls = {
+      'ip': 'https://forms.office.com/r/kdyTBHKxE7',
+    };
+    if (registerUrls[key]) {
+      const bento = document.querySelector('.bento');
+      const regCard = document.createElement('a');
+      regCard.href = registerUrls[key];
+      regCard.target = '_blank';
+      regCard.rel = 'noopener';
+      regCard.className = 'card-reg-open';
+      regCard.innerHTML = `
+        <div class="card-reg-open-left">
+          <div class="card-reg-open-badge">
+            <span class="card-reg-open-dot"></span>
+            <span class="card-reg-open-badge-text">Registrations Open</span>
+          </div>
+          <div class="card-reg-open-title">Register for International Press</div>
+          <div class="card-reg-open-sub">Spots are limited — secure your press accreditation now.</div>
+        </div>
+        <span class="card-reg-open-btn">
+          Register Now
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>`;
+      bento.insertBefore(regCard, bento.firstElementChild);
+    }
+
+    // inject prep + eb cards directly into bento grid
+    const bento = document.querySelector('.bento');
+    const prepPlaceholder = document.getElementById('prepCards');
+    const ebPlaceholder = document.getElementById('ebCards');
+
+    const prepIcons = [
+      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="1" width="12" height="16" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M6 6h6M6 9h6M6 12h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1L2 5v5c0 4 3 7 7 8 4-1 7-4 7-8V5L9 1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>`,
+      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M9 5v4l3 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`
+    ];
+
+    // Only show Background Guide
+    const bgGuides = {
+      'disec':       '/background%20guides_rop/DISEC%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'unsc':        '/background%20guides_rop/UNSC%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'unhrc':       '/background%20guides_rop/UNHRC%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'jcc-1':       '/background%20guides_rop/JCC%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'jcc-2':       '/background%20guides_rop/JCC%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'hcc':         '/background%20guides_rop/HCC%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'lok-sabha':   '/background%20guides_rop/Lok%20Sabha%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'armageddon':  '/background%20guides_rop/Armageddon%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'un-women':    '/background%20guides_rop/UN%20Women%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'copuos':      '/background%20guides_rop/COPUOS%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'us-senate':   '/background%20guides_rop/US%20Senate%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'unodc':       '/background%20guides_rop/UNODC%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'ecofin':      '/background%20guides_rop/ECOFIN%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'fifa':        '/background%20guides_rop/FIFA%20Council%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'who':         '/background%20guides_rop/WHO%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+      'unga-sochum': '/background%20guides_rop/SOCHUM%20Background%20Guide%20-%20Oakridge%20MUN%202026.pdf',
+    };
+    const bgPdf = bgGuides[key];
+
+    const photoSrc = photos[key] ? `/committee_photos/${photos[key]}` : '';
+    const dlSvg = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v8M3 6l3.5 3.5L10 6M2 11h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+    function makeGuideCard(cardName, cardType, cardTopic, pdf) {
+      const el = document.createElement('a');
+      el.className = 'bento-guide-card';
+      el.href = pdf || '#';
+      if (pdf) el.target = '_blank';
+      el.innerHTML = `
+        ${photoSrc ? `<img class="guide-bg" src="${photoSrc}" alt="" loading="lazy">` : ''}
+        <div class="guide-type">${cardType}</div>
+        <div class="guide-card-body">
+          <div class="guide-name">${cardName}</div>
+          <div class="guide-topic">${cardTopic}</div>
+          <div class="guide-footer">
+            <span class="guide-status">${pdf ? 'Available' : 'Out Now'}</span>
+            <a class="guide-dl" ${pdf ? `href="${pdf}" target="_blank"` : ''}>${dlSvg}${pdf ? 'Open PDF' : 'Download'}</a>
+          </div>
+        </div>`;
+      return el;
+    }
+
+    if (key === 'ip') {
+      const ipGuides = [
+        { name: 'Journalism Style Guide', type: 'Style Guide', topic: 'Reporting standards and editorial guidelines for IP delegates.', pdf: '/background%20guides_rop/Oakridge%20MUN%202026-%20Journalism%20Style%20Guide.pdf' },
+        { name: 'Photography Style Guide', type: 'Style Guide', topic: 'Visual storytelling and photography guidelines for IP delegates.', pdf: '/background%20guides_rop/Oakridge%20MUN%202026%20-%20Photography%20Style%20Guide%20Final.pdf' },
+      ];
+      ipGuides.forEach(g => bento.insertBefore(makeGuideCard(g.name, g.type, g.topic, g.pdf), prepPlaceholder));
+    } else {
+      const topic = agenda && agenda[0] ? agenda[0] : overview;
+      bento.insertBefore(makeGuideCard('Background Guide', committees[key][2], topic, bgPdf), prepPlaceholder);
+    }
+
+    const ebRoles = {
+      'disec':       ['Chairperson', 'Vice-Chairperson', 'Rapporteur'],
+      'unsc':        ['President', 'Vice-President'],
+      'unhrc':       ['President', 'Vice-President', 'Rapporteur'],
+      'jcc-1':       ['Crises Director', 'Crises Moderator'],
+      'jcc-2':       ['Crises Director', 'Crises Moderator'],
+      'hcc':         ['Crises Director', 'Crises Moderator'],
+      'lok-sabha':   ['Speaker', 'Deputy Speaker', 'Scribe'],
+      'armageddon':  ['Chief Crises Moderator', 'Deputy Crises Moderator'],
+      'un-women':    ['Chairperson', 'Vice-Chairperson', 'Rapporteur'],
+      'copuos':      ['Chairperson', 'Vice-Chairperson'],
+      'us-senate':   ['President', 'Co-President Pro Tempore', 'Co-President Pro Tempore'],
+      'unodc':       ['Chairperson', 'Vice-Chairperson', 'Co-Vice Chairperson'],
+      'ecofin':      ['Chairperson', 'Vice-Chairperson', 'Co-Vice Chairperson'],
+      'fifa':        ['FIFA President', 'FIFA Vice-President', 'Director'],
+      'who':         ['Chairperson', 'Vice-Chairperson'],
+      'unga-sochum': ['Chairperson', 'Co-Vice Chairperson', 'Co-Vice Chairperson'],
+      'ip':          ['Editor-in-Chief', 'Deputy Editor-in-Chief', 'Director of Photography', 'Director of Photography'],
+    };
+    const roles = ebRoles[key] || ['Chairperson', 'Vice-Chairperson', 'Rapporteur'];
+
+    // Known EB members — indexed by committee key, then by role position
+    const ebMembers = {
+      'who': [
+        { name: 'Mihir Eeshan', photo: '/eb_photos/page1_0_X5.webp', photoPos: 'center 15%', desc: 'Mihir is a rising 3rd year Neuroscience student at Ashoka University with a rigorous professional background in Human Rights and Health Policy; he has been at the forefront of the same for 4+ years within and outside Hyderabad, including chairing Harvard MUN and winning several prestigious awards. With research experience at the University of California San Diego, Koita Centre for Digital Health, and the University of Hyderabad, he brings a sharp sense of detail and policy expertise. He is a UNHCR Advocacy Award awardee and a United Nations Millennium Fellowship Campus Director, fond of singing or cooking in his free time. Mihir values clarity, vision, and dedication in his committee, and looks forward to leading an impactful World Health Organisation at Oakmun 2026.' },
+        { name: 'Pratheek Konda', photo: '/eb_photos/page1_1_X7.webp', photoPos: 'right top', desc: 'Pratheek Konda is an aspiring doctor that has created his own medical camp through a food business he supported, he is an IBDP 1 student at Oakridge International School that is taking Biology, Chemistry, and Mathematics at a higher level when he embarks on his journey to the IBDP programme. He loves Barca with his whole heart and plays football for his school, Pratheek is a die hard community volunteer that has dedicated over 100 hours at local government schools, food drives, and charity work. His voice may be deep but he\'s a kind person at heart. He would love to see each and every one of you at OakMUN 2025!' },
+      ],
+      'unsc': [
+        { name: 'Satrajit Sahani', photo: '/eb_photos/satrajit.webp', photoPos: 'center 20%', desc: 'Satrajit Sahani is an MBA grad, published poet and a sports enthusiast. His first brush with MUNs was a decade back in Delhi and he hasn\'t looked back since. He lives and breathes world politics and literature in equal measures. He has a sincere appreciation towards the finer arts and when he is not working, he can be found either writing something or traveling around the country. He lives by a simple rule, be a go-getter, if you want something go and get it, anything less is an excuse.' },
+        { name: 'Vishruth Veera Reddy', photo: '/eb_photos/new_doc/p1_0_1280x855.webp', photoPos: 'center 20%', desc: 'Vishruth is an incoming college student and an Oakridge alumnus who has been passionate about Model United Nations for the past four years. With over 25 conferences under his belt, he has served as a Delegate, Executive Board member, and Secretariat member, each role strengthening his appreciation for diplomacy, public speaking, and global affairs. He looks forward to meeting you all and making this conference an unforgettable experience.' },
+      ],
+      'copuos': [
+        { name: 'Dhanush Malhotra', photo: '/eb_photos/page2_3_X12.webp', desc: 'Dhanush Malhotra is a Law Student at ICFAI Hyderabad. As an EB, he aims help delegates create memories. In his spare time, he enjoys drumming, reading and playing video games. Dhanush also holds high regards for debates and discussions regarding anything from politics to a new tv show.' },
+        { name: 'Naren Ayinala', photo: '/eb_photos/naren_ayinala.webp', photoPos: 'center 20%', desc: 'Naren Ayinala is a rising sophomore pursuing Computer Science at the University of Maryland. With nearly 10 years experience in the world of MUNs, he has been involved in various capacities of the conference from a Delegate to an EB member, and even as a member of the Secretariat. As an avid comic book fan, he loves reading various DC Comic books and staying up to date on the latest geopolitical, finance, and aviation news. In his free time, you may find him watching movies, TV shows, listening to melody songs, editing Wikipedia articles (with a count now around 20,000; he loves to waste time),and taking part in discussions that can prove to be of no use such as "Why the Condiment Man is the best batman villain" (if you don\'t agree, he is going to assume you like Kite Man at least). He believes that MUNs can have a profound impact on a person helping them to become a better person. All in all, he\'s extremely excited to meet you all at the conference and looks forward to making it a memorable experience for everyone :). Ooh he also loves snoopy and believes that orange lays is the superior lays.' },
+      ],
+      'lok-sabha': [
+        { name: 'Aaron Mirza', photo: '/eb_photos/aaron_mirza.webp', photoPos: 'center 20%', desc: 'Aron Mirza is a Law Graduate with an interdisciplinary masters in International Relations, International Law and Global Business. He has been a passionate and enthusiastic debater during his student days tracing back to 2011 and had created a niche reputation for himself in Model UN\'s across Asia and Youth Parliaments throughout India. He started his professional career as an Assistant Professor for Political Science and International Law at St. Joseph\'s College of Law, Bangalore where he taught Political Science, Public Administration and Public International Law. Thereafter he served as a National Spokesperson of the Youth Wing of a Political party in India before becoming a freelance Political Consultant & Strategist alongside being the Principal of a School in rural Karnataka that caters to providing education to students coming from Socio-Economically Weaker sections of the society. Aaron Mirza has worked and successfully managed campaigns of Political Parties and individuals within India and outside including the successful Presidential Election campaign in an African Country. Recently, he was tasked with the Electoral Campaign focusing on consolidation of Youth Voters and First time voters for a National Political party in the state of Telangana and subsequently was one of the leads managing the Electoral War Room of that party during the recently concluded Lok Sabha Elections in Telangana. His core areas of Interest and expertise include the practical aspects of Political Parties and Elections, Electioneering in India & Eastern Africa, Political Communication, Micro Electoral Campaigns and Constitutional Approach towards Modern Indian Politics.' },
+        { name: 'Anya Patel', photo: '/eb_photos/page3_5_X16.webp', photoPos: 'center top', desc: 'If the picture is any indication, Aanya has heard one too many things in Lok Sabha that have left her momentarily speechless. She aims to pursue a career in Philosophy, Politics, and Economics, to understand how people, policies, and systems interact, and eventually shape the world. This interest is what draws her towards committees such as Lok Sabha because of their intensity and depth of debate. Outside of MUNs, Aanya can be found playing the piano or passionately arguing for why dogs are the world\'s most frightening creatures. Also, Beyoncé and good tea are basically her essentials, giving her energy for those late nights finishing coursework. She\'s looking forward to being your deputy speaker for Lok Sabha at OAKMUN 2026!' },
+        { name: 'Reyaan Villa', photo: '/eb_photos/page3_4_X15.webp', photoPos: 'center 40%', desc: 'Reyaan Aditya Villa is an IB DP1 student at Indus ,with a strong interest in leadership, public speaking, and the performing arts. He is passionate about cricket, both as a player and follower of the sport, and supports the Sunrisers Hyderabad in the IPL. Reyaan also enjoys theatre, films, and playing the guitar. Alongside his creative interests, he actively participates in Indian politics and Lok sabhas.' },
+      ],
+      'jcc-1': [
+        { name: 'Ayush R', photo: '/eb_photos/ayush_r.webp', photoPos: 'center 20%', desc: 'Ayush has been involved in the debating and public speaking sphere for a very long time. Ayush\'s passion for MUNs and debating has taken different forms over the years. In the last few years however, Ayush has turned educator - working with schools across India as a debating, public speaking and international relations coach. He has trained over 6000 students till date!' },
+        { name: 'Akshay Sandhyala', photo: '/eb_photos/new_page7_0_X31.webp', photoPos: 'center 25%', desc: 'Akshay is an IBDP 1 student taking Biology, physics, and chemistry at the higher level. He hopes to become a successful doctor and help tackle rare illnesses through research and clinical care. Problem solving is crucial in his future goals, and he seeks to use those skills in committee to vice chair his delegates regardless of the crisis at the hand.' },
+      ],
+      'jcc-2': [
+        { name: 'Gowtham Srinivas', photo: '/eb_photos/gowtham_srinivas.webp', photoPos: 'center 20%', desc: 'Mr.Gowtham Srinivas is an avid MUNner who has attended 100+ MUNs spanning all over India. He is a Political Science major and often comes across various topics that help keep him up to date on the current affairs of the world as well as agendas of MUNs. Gowtham particularly enjoys MUNs as it gives people a chance to constructively debate world problems and arrive at well-informed solutions. He also enjoys the sessions themselves, the small jokes, and the heated lobbying.' },
+        { name: 'Raaghav Modukuri', photo: '/eb_photos/new_page8_0_X35.webp', photoPos: 'center 30%', desc: 'Raaghav is an incoming DP1 student studying in Oakridge International School who\'s been hooked on MUNs and debates ever since his first competition. Having competed in multiple MUNs and represented Team India internationally and competing on the US Public Forum Circuit for over half a decade, with numerous speaker and team awards, he has been passionate about the practice and fascinated by the concept. He believes that MUNs are not just experiences - they\'re spaces to grow, connect, and lead. He is very excited to serve as your vice chair and hopes to see you all at OakMUN 2026!' },
+      ],
+      'hcc': [
+        { name: 'Aravind Belur', photo: '/eb_photos/page4_6_X20.webp', desc: 'Your first impression of Aravind Belur might be that of a realist but his accomplishments will make you realise that he\'s someone who can make the impossible possible. Be it his masterfully cascading directives or his intimidating presence in any committee he sets foot in, Aravind is indeed a true mastermind both inside and outside the committee. With an extensive experience in MUNs, both in front of and behind the executive board, Aravind has won accolades from the best conferences of both the high school circuit and college circuits. A staunch believer in the fact that it\'s not right to judge others based on your perceptions and their appearances, this executive board member knows never to underestimate the opponent and that is probably one of his best qualities. An anime buff, an engineer, and someone whose interest in MUNs never fades.' },
+        { name: 'Prabhas Adabala', photo: '/eb_photos/prabhas.webp', photoPos: 'center 20%', desc: 'Prabhas Adabala, a CSE student at BITS Hyderabad moving into his junior year, is known for being a friendly and approachable person. With nearly six years of experience and over 50 conferences under his belt, Prabhas has established himself as an active member of the MUN circuit. He firmly believes that MUNs play a crucial role in inspiring young people to become informed leaders and responsible global citizens. When he\'s not at a conference, you\'ll probably find him falling deeper into the propaganda that pickleball is a real sport or geeking out over some random topic.' },
+      ],
+      'armageddon': [
+        { name: 'Akash P Videsh', photo: '/eb_photos/page6_9_X27.webp', photoPos: 'center 40%', desc: 'He is a young science enthusiast and a Computer Science Engineering graduate from VIT Chennai, currently carving his path in the professional world. He began his MUN journey back in 8th grade and has since taken on a range of leadership roles - including Secretary General, Chief Advisor, and Chairperson - at several prominent school and collegiate level MUNs. His passion for international affairs continues today, with active participation in college and city-level circuits, especially in dynamic crisis committees where quick thinking is key. Moreover, he has also served as the President of the Debate Society of VIT Chennai and was a prominent member of the VIT Chennai Mun Delegation. A lifelong quizzer, he was a dominant force in the Coimbatore quiz scene throughout high school, leading his school to success in some of the country\'s most prestigious quiz competitions.' },
+        { name: 'Ritesh Marupudi', photo: '/eb_photos/ritesh.webp', photoPos: 'center 20%', desc: 'Ritesh Marupudi has an academic background in Mathematics, Economics, and Computer Science, aspiring to pursue a career in Computational Engineering. With over half a decade\'s worth of experience in Model United Nations as both a delegate and Executive Board member, Ritesh deeply understands the intensity and passion MUNs inspire, particularly enjoying the challenge of solving major humanitarian issues. His curiosity about geopolitics and global affairs has driven him to develop a deep passion for and actively participate in Model United Nations. He is excited to see you all at OAKMUN 2026!' },
+      ],
+      'ecofin': [
+        { name: 'Faraaz Uddin', photo: '/eb_photos/page6_10_X28.webp', photoPos: 'center 30%', desc: 'Faraazuddin is a law graduate with interests in policy, and institutional decision-making. His academic interests mostly involve asking inconvenient questions about regulation, governance, and why every emerging technology somehow ends with lawmakers discovering it six, seven, or nine years too late. He started in the Model UN circuit 10 years ago and is engaged as a Model UN Trainer with Worldview Education. He previously served on the Core Team of Harvard Model United Nations India, trained students for Oxford Model United Nations, and most recently served as Secretary-General of the Xth Edition of ICON. He approaches committee spaces with an emphasis on substantive engagement, institutional understanding, and rigorous debate.' },
+        { name: 'Ojas Dhaveji', photo: '/eb_photos/ojas.webp', photoPos: 'center 20%', desc: 'Ojas is a student at UC Berkeley majoring in Economics with over 15 MUNs under his belt. A passionate supporter, he enjoys playing basketball and watching sports with his friends. He closely follows the world of politics and economics, keeping up with the stock market, Trump, and Indian politics. If you can\'t find him playing the piano or obsessing over the next FPS video game (and GTA VI of course), he\'s binge-watching thriller or action movies and TV shows. Ojas believes, given his knowledge and interest in geopolitics, that MUNs are some of the best experiences to cultivate critical thinking, diplomacy, and become a better communicator. As his last OAKMUN as a student of Oakridge Gachibowli, he hopes to make it memorable for all.' },
+        { name: 'Arnav Shetty', photo: '/eb_photos/new_page10_0_X43.webp', photoPos: 'center 20%', desc: 'Arnav is an undergraduate student with a strong interest in economics and public policy. He carries experience from over 15 MUNs, and enjoys engaging with complex policy discussions and exploring the intracacies of economics and global affairs.' },
+      ],
+      'unhrc': [
+        { name: 'Sai Preethi Polu', photo: '/eb_photos/new_page13_0_X55.webp', photoPos: 'center 20%', desc: 'Sai Preethi Polu is an avid munner who has attended over 100 MUNs in several circuits. Although she graduated B.Tech. in Information Technology, her passion for MUNs keeps her frequently exposed to worldly events that keep her up to date with current affairs of the world. Preethi takes a keen interest in taking part in MUNs and believes them to be an excellent platform for people to improve their analytical skills and leadership skills. While she is known for her experience in the International Press, she has an affinity towards humanitarian committees. She wishes the best for the participants of the conference and looks forward to the conference.' },
+        { name: 'Tanvi Kodali', photo: '/eb_photos/page9_14_X39.webp', photoPos: 'right 25%', desc: 'Introducing tanvi kodali — energetic, outspoken, and endlessly curious, she brings both creativity and determination into everything she does. She\'s the kind of person who can light up a room with her enthusiasm while still staying deeply driven and focused when it matters most. With an ambitious mindset and a natural ability to connect with people, she balances confidence with warmth. Whether she\'s leading discussions, brainstorming ideas at 2 a.m., or turning chaos into organization, she approaches life with passion, humor, and a genuine desire to make every experience meaningful. She\'s looking forward to Oakmun 2026!' },
+        { name: 'Vaanya Sharma', photo: '/eb_photos/page9_15_X40.webp', desc: 'Vaanya Sharma is a Grade 11 student at Chirec International School, pursuing Mathematics, Physics, Chemistry, and Psychology. Having participated in MUNs for the past six years, she believes that they are a platform that inspires delegates to think critically, speak confidently, and stand up for what they believe in. Aside from MUNs, when she\'s not with her two golden retrievers, Vaanya is often found on the basketball court, learning a new dance choreography or perfecting yet another song cover. She can\'t wait to see you all at the conference this year!' },
+      ],
+      'fifa': [
+        { name: 'Syed Hudaifah', photo: '/eb_photos/page10_16_X43.webp', photoPos: 'center 20%', desc: 'With nearly a decade in MUNs and over 100 conferences under his name, Hudaifah is an IIT Hyderabad graduate, national-level footballer, and quantum scientist. Returning to Oakridge is always special, it is where many of his best memories were made. While the campus, people, and nostalgia bring him back, Concú\'s Tres Leches ensures he never stays away for too long. Some things change with time; that dessert apparently does not.' },
+        { name: 'Jiteesh Reddy', photo: '/eb_photos/page10_17_X44.webp', photoPos: 'right 25%', desc: 'Jiteesh Reddy is the former Director of Varsity Sports Hyderabad and a freshman joining University of British Columbia this fall, with experience across 20+ conferences in roles ranging from delegate to executive board and secretariat. As the Vice Chair of the FIFA Committee at OAK MUN 2026, he aims to foster a committee that balances rigorous debate, strategic negotiation, and engaging discussion, while creating an environment where delegates can challenge ideas, collaborate effectively, and leave with a truly memorable conference experience.' },
+        { name: 'Meghamsh Pranav Boyapati', photo: '/eb_photos/page11_18_X47.webp', photoPos: 'center 53%', desc: 'Meghamsh Pranav Boyapati, a 12th-grade student at Oakridge International School, is an aspiring lawyer currently preparing for CLAT. With five years of experience in Model United Nations, he excels in debate and critical analysis. A passionate polymath, he channels his competitive spirit into supporting Liverpool FC and Sunrisers Hyderabad with unwavering, dedicated enthusiasm.' },
+      ],
+      'disec': [
+        { name: 'Eswar Chava', photo: '/eb_photos/page11_19_X48.webp', photoPos: 'center 20%', desc: 'Eswar Chava, a renowned face in MUNs across the country, first discovered his passion for debate and diplomacy through MUNs in college. With a profound interest in international law and foreign policy, he believes that \'Life is what begins at the end of your comfort zone.\' Over the years, Eswar has amassed a wealth of experience across numerous UN committees, making him a respected and sought-after figure, particularly in military committees, where his insights and expertise have left a lasting impact. When he\'s not stressed out by his work, you\'ll find him gaming or vibing to music. Known for his down-to-earth personality and genuine dedication to fostering collaboration, Eswar is honoured to serve on the Executive Board, ready to champion a space where meaningful dialogue can thrive and every delegate\'s voice is heard.' },
+        { name: 'Ayush Mantri', photo: '/eb_photos/page12_20_X51.webp', photoPos: 'center 25%', desc: 'Ayush Mantri is a recent high school graduate. He actively participates in policy and military-based committees throughout the Hyderabad circuit.' },
+        { name: 'Anirudh Sai Bhimrao', photo: '/eb_photos/page12_21_X52.webp', photoPos: 'center 45%', desc: 'Anirudh Sai Bhimrao is a 12th grader from DPSH with extensive experience in MUN conferences, where he has earned numerous awards. Representing his school, district, and the state of Telangana, Anirudh is known for his exceptional basketball skills while also being a dedicated MPC student, regarded for his academic excellence. Aspiring to do it all, he balances academics and extracurriculars with enthusiasm. Despite his rigorous schedule, as a passionate cinephile, you\'ll always find him watching the latest Telugu movies and enjoying sitcoms. He\'s honoured to serve as your rapporteur and strives to provide the best experience to all the delegates.' },
+      ],
+      'unodc': [
+        { name: 'Ishaan Poddar', photo: '/eb_photos/new_doc/p2_0_1280x853.webp', photoPos: 'center 20%', desc: 'Ishaan Poddar is a law student from NALSAR University of Law. Involved in the MUN circuit since 2018, with over 50 MUNs under his belt, he has a reputation of being competitive, passionate and unconventional.' },
+        { name: 'Anvi Waghmare', photo: '/eb_photos/page13_23_X56.webp', photoPos: 'center 35%', desc: 'Anvi has a passion for communication and an advocate for the power of meaningful dialogue. Preparing to study Philosophy, Politics and Economics fuels her interest in global affairs and economic issues. She\'s also an avid reader, writer, and conversationalist, drawn to exchanges that explore fresh perspectives and ideas. Whether she\'s reading (literally) everything from romance to historical analysis, writing, or connecting with others, Anvi always emphasizes leading with kindness. She\'s thrilled to be serving on the OakridgeMUN Executive Board this year!' },
+        { name: 'Poorvi Kurundkar', photo: '/eb_photos/page13_22_X55.webp', photoPos: 'center 25%', desc: 'Poorvi Kurundkar is a Grade 12 IBDP student at Oakridge Gachibowli, pursuing Math, Biology, and Physics at the Higher Level. Having been involved in Model United Nations long before she could tie her own shoelaces, she has participated in over a dozen conferences as a delegate, member of the Secretariat, and Executive Board. She is excited to serve as the Co-Vice Chair of UNODC for OakMUN 2026 and looks forward to fostering meaningful discussion and make this committee a memorable experience for all delegates.' },
+      ],
+      'unga-sochum': [
+        { name: 'Sai Eshwar', photo: '/eb_photos/page14_24_X59.webp', photoPos: 'center 20%', desc: '"To lay down your arms without fighting is worse than defeat." Something he has been taught by the people around him and learnt from the heroes he admires, a principle he now tries to follow both in courtrooms and committee rooms. Sai Eshwar is an Advocate, a graduate of Osmania University with a BA-LLB, and also holds an Advanced Diploma in Patent Law from NALSAR. He is a familiar face in the Hyderabad circuit, specializing in both Indian and legal committees. He began participating in Model United Nations in 2019 and has earned recognition at almost every conference he has attended since. Beyond law and debating, he enjoys discussing politics with friends, occasionally arguing for sport even when there is nothing left to debate. When he needs to unwind, he can usually be found on a cricket field or a badminton court with his peers.' },
+        { name: 'Aanya Gouravaram', photo: '/eb_photos/new_page19_0_X77.webp', photoPos: 'center 30%', desc: 'Aanya Gouravaram is an incoming freshman at Tufts University. She believes that Oakridge MUN is an amazing experience for students to broaden their horizons in the world of global affairs and debate. She strongly agrees with the fact that MUNs help bring people together, and hopes that she can help make Oakridge MUN 2026 the best it can be!' },
+        { name: 'Arnavi Vanipenta', photo: '/eb_photos/arnavi_vanipenta.webp', photoPos: 'center 25%', desc: 'Arnavi Vanipenta is a recent IBDP graduate. She\'s been involved in MUNs since Grade 9, starting as a delegate and later joining the International Press. Over time, she found her passion in the press team. Arnavi believes that MUN embodies the art of debate, diplomacy and negotiation. She is incredibly excited to be a vice-chair at OAKMUN 2026!' },
+      ],
+      'un-women': [
+        { name: 'Tia Sanker', photo: '/eb_photos/new_doc/p3_0_1600x900.webp', photoPos: 'center 35%', desc: 'Introducing Tia Sanker. Don\'t be misguided by her size, she can annihilate her adversary in debate while still being the smallest in the room. She\'s a 2nd year law student who always bounces between activities, which is why you will never find her in class. Hear someone screaming in the corridor? Definitely Tia. Tia has been an integral part of the Hyderabad MUN circuit for over a decade, having done justice to roles in every capacity including those of Secretariat, Executive Board and Delegate. Currently working as a Young Champion for Refugees Trainee under the UNHCR and the Project Head of the Vimala Sankar Trust for the Marginalised. Tia is an extremely approachable and friendly person, resolute to complete every single task given to her with perfection' },
+        { name: 'Srihitha Suryadevara', photo: '/eb_photos/page16_28_X67.webp', photoPos: 'center 45%', desc: 'I\'m Srihitha, and I just finished my first year at the University of Maryland, Baltimore County (UMBC). I\'ve been doing MUNs since I was in grade 4, so it\'s safe to say it\'s a massive part of my life. Because I\'m planning to pursue law, MUN is a huge passion of mine, but it\'s definitely not my only one! I am also super passionate about business marketing, films, and fashion. When I\'m bored, you will probably find me rating Met Gala looks and what not. I am so excited for this committee, and I hope to do my best to make sure the delegates have the besttt experience! Can\'t wait to meet you all!' },
+        { name: 'Janya Reddy', photo: '/eb_photos/page16_27_X66.webp', photoPos: 'center 40%', desc: 'Janya is an 11th-grade student with a keen interest in business and economics. She is passionate about global politics, enjoying engaging in discussions on pressing international issues. She is eager to contribute to a meaningful experience at this conference.' },
+      ],
+      'us-senate': [
+        { name: 'Fazil Razak', photo: '/eb_photos/new_doc/p3_1_1179x1150.webp', photoPos: 'center 20%', desc: 'Fazil Razak needs no introduction. He has participated in over 125 MUNs and has chaired multiple committees, with a specialisation in the United Nations Security Council and military committees. He also closely follows international affairs and US politics. We are privileged to have him as the Chairperson for US Senate.' },
+        { name: 'Vishnu Mullapudi', photo: '/eb_photos/vishnu_mullapudi.webp', photoPos: 'center 20%', desc: 'Having attended over 20+ MUNs and winning multiple accolades as a delegate, EB member and IP member, Vishnu Mullapudi is ecstatic to be president pro tempore/ vice chair for US senate! When he\'s not busy playing video games,, he will talk your ear off about philosophy for hours. Vishnu believes that MUNs enable today\'s learners to cultivate critical thinking and diplomacy by providing an essential understanding of current affairs. He hopes to make OakMUN 2026 a memorable one!' },
+        { name: 'Aahana Jain', photo: '/eb_photos/new_page20_0_X81.webp', photoPos: 'center 20%', desc: 'Aahana Jain is a recent IBDP graduate. She\'s been involved in MUNs since Grade 6 as a delegate, later joining the International Press, while also have been a secretariat member.Aahana believes that MUN embodies the art of debate, diplomacy and negotiation. She is incredibly excited to be a vice-chair at OAKMUN 2026!' },
+      ],
+      'ip': [
+        { name: 'Namrata', photo: '/eb_photos/namrata.webp', photoPos: 'center 20%', desc: 'Namrata just graduated from DP2 at Oakridge International School, on her way to study media at Brown University in the fall. She loves all things to do with writing, which is what drew her to the International Press initially. Namrata also loves theatre, travel, and music, and is a die hard fan of Taylor Swift. When not procrastinating and wasting time, you can find her stuck in a book, binge-watching YouTube, playing with her dog, or making plans to travel again as soon as possible. She\'s thrilled to serve as the Head of Journalism for this year\'s conference!' },
+        { name: 'Aryan', photo: '/eb_photos/page17_29_X70.webp', photoPos: 'right 25%', desc: 'Aryan is a DP1 student at Oakridge International School, Gachibowli. Having been part of MUNs for several years as a journalist in the International Press, he\'s ecstatic to be your Deputy Editor-in-Chief for Oakridge MUN 2026. Outside of MUNs, he loves playing basketball and exploring his interest in programming and biotechnology. He believes that MUNs enable today\'s learners to cultivate critical thinking and diplomacy, and hopes to recreate his love for them with the rest of the journalists, making it worthwhile for everyone attending, leaving with memories, learnings, and a great experience.' },
+        { name: 'Sanjith Chellamuthu', photo: '/eb_photos/sanjith.webp', photoPos: 'center 20%', desc: 'Sanjith Chellamuthu is currently pursuing the International Baccalaureate Diploma Programme with Higher Level courses in Physics, Business Management, and Mathematics. He is grateful for the opportunity to serve as the Director of Photography, where he hopes to capture the defining moments and stories that make every MUN memorable. Having developed a strong passion for photography and visual storytelling over the years, he believes that every photograph has the power to preserve emotions and inspire perspectives. Beyond photography, he has an interest in artificial intelligence, machine learning, web development and travelling. He believes that MUNs provide students with an incredible platform to develop confidence, leadership, and lifelong skills, and he is excited to contribute his creativity and passion to the event.' },
+        { name: 'Iha', photo: '/eb_photos/iha.webp', photoPos: 'center 20%', desc: 'Iha is a passionate photographer who enjoys capturing the places and people around her. She has participated in numerous Model United Nations conferences and is excited to serve as co head of photography for this year\'s OakMUN!' },
+      ],
+    };
+
+    const ebWrapper = document.createElement('div');
+    ebWrapper.className = 'eb-row';
+    // Horizontal cards: max 2 per row looks best
+    ebWrapper.style.gridTemplateColumns = roles.length === 1 ? '1fr' : 'repeat(2, 1fr)';
+    const ebClasses = ['eb-chair', 'eb-vice', 'eb-rap', 'eb-rap'];
+    roles.forEach((role, i) => {
+      const member = (ebMembers[key] || [])[i] || null;
+      const initials = role.split(' ').map(w => w[0]).join('');
+      const el = document.createElement('div');
+      el.className = `card card-eb ${ebClasses[Math.min(i, ebClasses.length - 1)]}${member ? ' has-member' : ''}`;
+      el.innerHTML = `
+        <div class="eb-card-top${member?.photo ? ' has-photo' : ''}">
+          ${member?.photo ? `<img class="eb-card-photo" src="${member.photo}" alt="${member.name}" loading="lazy"${member.photoPos ? ` style="object-position:${member.photoPos}"` : ''}>` : ''}
+          <div class="eb-card-initials">${initials}</div>
+          <span class="eb-card-tba-label">To be announced</span>
+        </div>
+        <div class="eb-card-body">
+          <div class="eb-card-name">${member ? member.name : 'Announcing soon'}</div>
+          <div class="eb-card-role">${role}</div>
+          <div class="eb-card-desc">${member?.desc || 'This executive board member will guide debate, evaluate delegate performance, and maintain a focused committee experience.'}</div>
+          ${member?.desc ? '<button class="eb-read-more">Read more</button>' : ''}
+        </div>`;
+      ebWrapper.appendChild(el);
+    });
+    bento.insertBefore(ebWrapper, ebPlaceholder);
+
+    ebWrapper.querySelectorAll('.eb-read-more').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const desc = btn.previousElementSibling;
+        const card = btn.closest('.card-eb');
+        const expanded = desc.classList.toggle('expanded');
+        card.classList.toggle('expanded-card', expanded);
+        btn.textContent = expanded ? 'Read less' : 'Read more';
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, expanded ? 200 : 0);
+      });
+    });
+
+    prepPlaceholder.remove();
+    ebPlaceholder.remove();
+
+    // ── BACK-LINK: store key so committees.html can target the right card ──
+    (function() {
+      const backLink = document.querySelector('.back-link');
+      if (!backLink) return;
+      backLink.addEventListener('click', function() {
+        sessionStorage.setItem('zt_return_key', key);
+      });
+    })();
+
+    // ── CARD REVEAL (lightweight) ──
+    (function() {
+      const cardEls = document.querySelectorAll('.card');
+      if (!cardEls.length) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const index = [...cardEls].indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('revealed'), index * 45);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      cardEls.forEach(card => observer.observe(card));
+    })();
+
+    // ── NAV SCROLL BLUR ──
+    const navEl = document.querySelector('nav');
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    function syncNavBottom() {
+      const nav = document.getElementById('navbar');
+      if (nav) document.documentElement.style.setProperty('--nav-bottom', nav.getBoundingClientRect().bottom + 'px');
+    }
+    syncNavBottom();
+    window.addEventListener('resize', syncNavBottom);
+    window.addEventListener('orientationchange', syncNavBottom);
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      syncNavBottom();
+      const isOpen = mobileNav.classList.toggle('open');
+      menuBtn.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        menuBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    mobileNav.querySelectorAll('a').forEach(a => {
+
+      a.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        menuBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    let navScrolled = false;
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth <= 768) return;
+      const y = window.scrollY;
+      const goingDown = y > lastScrollY;
+      lastScrollY = y;
+      if (goingDown && y > 40 && !navScrolled) { navScrolled = true; navEl.classList.add('scrolled'); }
+      else if (!goingDown && navScrolled) { navScrolled = false; navEl.classList.remove('scrolled'); }
+    }, { passive: true });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768 && navScrolled) { navScrolled = false; navEl.classList.remove('scrolled'); }
+    });
+
+    // ── DESKTOP HOVER EXPAND (logo mark trigger) ──
+    const navMark = navEl.querySelector('.nav-mark');
+    if (navMark) {
+      navMark.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 768 && navEl.classList.contains('scrolled')) {
+          navEl.classList.add('hover-expanded');
+        }
+      });
+    }
+    navEl.addEventListener('mouseleave', () => {
+      navEl.classList.remove('hover-expanded');
+    });
+
+    // ── SCROLL REVEAL ──
+    (function() {
+      const srEls = document.querySelectorAll('.sr');
+      if (!srEls.length) return;
+      const srObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          if (e.target.closest('#heroSection.vt-hold')) return;
+          e.target.classList.add('sr-visible');
+          srObs.unobserve(e.target);
+        });
+      }, { threshold: 0.08 });
+      srEls.forEach(el => srObs.observe(el));
+    })();
+  </script>
+
+  <!-- Smooth Scrolling (Lenis) -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script>
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    if (!isTouchDevice) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const lenis = new Lenis(prefersReducedMotion ? { smoothWheel: false } : {
+        lerp: 0.11, smoothWheel: true, wheelMultiplier: 0.95, normalizeWheel: true, infinite: false,
+      });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
+  </script>
+
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5c0c1894a48148ec84530182e4f9cb78"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
